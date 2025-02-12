@@ -1,0 +1,48 @@
+name: iphone
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.6.0
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^1.0.3
+  path_provider: ^2.1.5
+  cupertino_icons: ^1.0.8
+  image_picker: ^0.8.4+4
+  shared_preferences: ^2.5.1
+  syncfusion_flutter_charts: ^28.2.5+1
+  intl: ^0.20.2
+  table_calendar: ^3.0.3
+  fl_chart: ^0.70.2
+  flutter_datetime_picker: ^1.5.1
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  assets:
+    - assets/onboarding 41.svg
+    - assets/onboarding 42.svg
+    - assets/onboarding 43.svg
+    - assets/launch.svg
+    - assets/saved.svg
+    - assets/saved2.svg
+    - assets/settings.svg
+    - assets/knowledge.svg
+    - assets/fingram.svg
+    - assets/sovet.svg
+    - assets/zashita.svg
+    - assets/zashitadannih.svg
+    - assets/pustaya.svg
+    - assets/Expenses.svg
+    - assets/redaktor.svg
+  uses-material-design: true
