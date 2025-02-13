@@ -22,14 +22,20 @@ class SettingsScreen extends StatelessWidget {
             left: 13,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                elevation: 0,
                 minimumSize: Size(430, 70),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
+                  side: BorderSide.none,
                 ),
               ),
               onPressed: () {},
-              child: Text('Button 1'),
+              child: Text(
+                '',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
           ),
           Positioned(
@@ -37,14 +43,16 @@ class SettingsScreen extends StatelessWidget {
             left: 13,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                elevation: 0,
                 minimumSize: Size(430, 70),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
               ),
               onPressed: () {},
-              child: Text('Button 2'),
+              child: Text(''),
             ),
           ),
           Positioned(
@@ -52,14 +60,16 @@ class SettingsScreen extends StatelessWidget {
             left: 13,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.transparent,
+                shadowColor: Colors.transparent,
+                elevation: 0,
                 minimumSize: Size(430, 70),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5),
                 ),
               ),
               onPressed: () {},
-              child: Text('Button 3'),
+              child: Text(''),
             ),
           ),
         ],
