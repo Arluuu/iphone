@@ -33,7 +33,7 @@ flutter:
     - assets/onboarding 41.svg
     - assets/onboarding 42.svg
     - assets/onboarding 43.svg
-    - assets/launch.svg
+    - assets/launch1.svg
     - assets/saved.svg
     - assets/saved2.svg
     - assets/settings.svg
@@ -45,4 +45,6 @@ flutter:
     - assets/pustaya.svg
     - assets/Expenses.svg
     - assets/redaktor.svg
+    - assets/3.svg
+    - assets/statusbarmain.svg
   uses-material-design: true

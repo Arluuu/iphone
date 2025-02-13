@@ -3,6 +3,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:iphone/Knowledge.dart';
+import 'package:iphone/SavedScreen.dart';
 import 'package:iphone/Settings.dart';
 import 'package:iphone/main.dart';
 import 'package:iphone/photki.dart';
@@ -613,6 +614,15 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                       child: Text('Нет данных для отображения',
                           style: TextStyle(fontSize: 18, color: Colors.grey)),
                     ),
+            ),
+          ),
+          Positioned(
+            bottom: 30,
+            right: 186,
+            child: SvgPicture.asset(
+              'assets/3.svg',
+              width: 83,
+              height: 83,
             ),
           ),
           Positioned(

@@ -90,16 +90,6 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
             ),
           ),
           NavBar(),
-          Positioned(
-            top: 74,
-            left: 10,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: _openCamera,
-              color: Colors.black,
-              iconSize: 30.0,
-            ),
-          ),
           SingleChildScrollView(
             padding: EdgeInsets.all(16.0),
             child: Column(
@@ -183,6 +173,25 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
                   ),
                 ),
               ],
+            ),
+          ),
+          Positioned(
+            top: 0,
+            right: 0,
+            child: SvgPicture.asset(
+              'assets/statusbarmain.svg',
+              width: 450,
+              height: 125,
+            ),
+          ),
+          Positioned(
+            top: 73,
+            left: 7,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: _openCamera,
+              color: Colors.transparent,
+              iconSize: 30.0,
             ),
           ),
         ],

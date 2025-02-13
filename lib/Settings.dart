@@ -1,25 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:iphone/Knowledge.dart';
 import 'package:iphone/NavBar.dart';
-import 'package:iphone/main.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
-
-  void _goBack(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => SavedScreen()),
-    );
-  }
-
-  void _navigateToKnowledge(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => KnowledgeScreen()),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +17,51 @@ class SettingsScreen extends StatelessWidget {
             height: double.infinity,
           ),
           NavBar(),
+          Positioned(
+            top: 154,
+            left: 13,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red,
+                minimumSize: Size(430, 70),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+              onPressed: () {},
+              child: Text('Button 1'),
+            ),
+          ),
+          Positioned(
+            top: 243,
+            left: 13,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                minimumSize: Size(430, 70),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+              onPressed: () {},
+              child: Text('Button 2'),
+            ),
+          ),
+          Positioned(
+            top: 350,
+            left: 13,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue,
+                minimumSize: Size(430, 70),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+              ),
+              onPressed: () {},
+              child: Text('Button 3'),
+            ),
+          ),
         ],
       ),
     );

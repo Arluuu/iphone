@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iphone/ExpensesScreen.dart';
+import 'package:iphone/SavedScreen.dart';
 import 'package:iphone/main.dart';
 import 'package:iphone/photki.dart';
 import 'package:iphone/Settings.dart';
@@ -78,6 +79,18 @@ class _NavBarState extends State<NavBar> {
           right: 105.0,
           child: InkWell(
             onTap: () => _navigateToKnowledge(context),
+            child: Container(
+              width: 56.0,
+              height: 56.0,
+              color: Colors.transparent,
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 30.0,
+          left: 25.0,
+          child: InkWell(
+            onTap: () => _goBack(context),
             child: Container(
               width: 56.0,
               height: 56.0,
