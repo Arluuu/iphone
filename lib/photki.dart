@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iphone/NavBar.dart';
@@ -84,38 +85,38 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: SvgPicture.asset(
-              'assets/pustaya.svg',
+            child: Image.asset(
+              'assets/pustaya.png',
               fit: BoxFit.cover,
             ),
           ),
           NavBar(),
           SingleChildScrollView(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 150.0),
+                SizedBox(height: 150.h),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(16.0),
+                    borderRadius: BorderRadius.circular(16.r),
                     border: Border.all(color: Colors.grey),
                   ),
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.w),
                   width: double.infinity,
                   child: Column(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(16.0),
+                        borderRadius: BorderRadius.circular(16.r),
                         child: Image.file(
                           File(_currentImage.path),
-                          width: 200,
-                          height: 200,
+                          width: 200.w,
+                          height: 200.h,
                           fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(height: 16.0),
+                      SizedBox(height: 16.h),
                       TextButton(
                         onPressed: _pickImage,
                         child: Text(
@@ -126,7 +127,7 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 16.h),
                 _buildInputField(
                     'Название покупки', 'Название', _nameController),
                 _buildDatePicker(
@@ -136,7 +137,7 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
                 _buildInputField(
                     'Категория', '#Категория покупки', _categoryController),
                 _buildInputField('Магазин', 'Место покупки', _storeController),
-                SizedBox(height: 16.0),
+                SizedBox(height: 16.h),
                 Row(
                   children: [
                     Checkbox(
@@ -155,20 +156,20 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
                       'Дата окончания гарантии', _warrantyDateController),
                 _buildInputField('Описание', 'Краткое описание покупки',
                     _descriptionController, null),
-                SizedBox(height: 16.0),
+                SizedBox(height: 16.h),
                 Center(
                   child: ElevatedButton(
                     onPressed: _isFormValid ? _savePurchaseDetails : null,
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 40.0, vertical: 20.0),
-                      fixedSize: Size(343, 65),
+                          horizontal: 40.w, vertical: 20.h),
+                      fixedSize: Size(343.w, 65.h),
                       backgroundColor:
                           _isFormValid ? Colors.orange : Colors.grey,
                     ),
                     child: Text(
                       'Сохранить',
-                      style: TextStyle(fontSize: 20),
+                      style: TextStyle(fontSize: 20.sp),
                     ),
                   ),
                 ),
@@ -176,22 +177,22 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
             ),
           ),
           Positioned(
-            top: 0,
+            top: -19,
             right: 0,
             child: SvgPicture.asset(
               'assets/statusbarmain.svg',
-              width: 450,
-              height: 125,
+              width: 375.w,
+              height: 125.h,
             ),
           ),
           Positioned(
-            top: 73,
-            left: 7,
+            top: 65.h,
+            left: 7.w,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: _openCamera,
-              color: Colors.transparent,
-              iconSize: 30.0,
+              color: Colors.black,
+              iconSize: 30.w,
             ),
           ),
         ],
@@ -206,7 +207,7 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label),
-        SizedBox(height: 8.0),
+        SizedBox(height: 8.h),
         TextField(
           controller: controller,
           keyboardType: keyboardType,
@@ -215,17 +216,17 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
             hintText: hint,
             border: InputBorder.none,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 2.0),
+              borderSide: BorderSide(color: Colors.grey, width: 2.w),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.orange, width: 2.0),
+              borderSide: BorderSide(color: Colors.orange, width: 2.w),
             ),
           ),
           onChanged: (value) {
             setState(() {});
           },
         ),
-        SizedBox(height: 16.0),
+        SizedBox(height: 16.h),
       ],
     );
   }
@@ -236,17 +237,17 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label),
-        SizedBox(height: 8.0),
+        SizedBox(height: 8.h),
         TextField(
           controller: controller,
           decoration: InputDecoration(
             hintText: hint,
             border: InputBorder.none,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 2.0),
+              borderSide: BorderSide(color: Colors.grey, width: 2.w),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.orange, width: 2.0),
+              borderSide: BorderSide(color: Colors.orange, width: 2.w),
             ),
           ),
           readOnly: true,
@@ -267,7 +268,7 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
             setState(() {});
           },
         ),
-        SizedBox(height: 16.0),
+        SizedBox(height: 16.h),
       ],
     );
   }

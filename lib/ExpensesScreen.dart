@@ -4,11 +4,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:iphone/Knowledge.dart';
 import 'package:iphone/SavedScreen.dart';
-import 'package:iphone/Settings.dart';
-import 'package:iphone/main.dart';
+import 'package:iphone/Sett.dart';
 import 'package:iphone/photki.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 
 class ExpensesScreen extends StatefulWidget {
@@ -58,7 +58,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
           builder: (context) => PurchaseDetailsScreen(
             image: image,
             onSave: (purchaseData) {
-              print("Покупка сохранена: \$purchaseData");
+              print("Покупка сохранена: $purchaseData");
             },
           ),
         ),
@@ -252,84 +252,48 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: SvgPicture.asset(
-              'assets/Expenses.svg',
+            child: Image.asset(
+              'assets/Expenses.png',
               fit: BoxFit.cover,
             ),
           ),
           Positioned(
-            bottom: 36.0,
-            right: 25.0,
-            child: InkWell(
-              onTap: () => _openSettings(context),
-              child: Container(
-                width: 56.0,
-                height: 56.0,
-                color: Colors.transparent,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 29.0,
-            right: 105.0,
-            child: InkWell(
-              onTap: () => _navigateToKnowledge(context),
-              child: Container(
-                width: 56.0,
-                height: 56.0,
-                color: Colors.transparent,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 29.0,
-            left: 27.0,
-            child: InkWell(
-              onTap: () => _openSavedScreen(context),
-              child: Container(
-                width: 56.0,
-                height: 56.0,
-                color: Colors.transparent,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 37,
-            left: 184,
+            bottom: 37.h,
+            left: 184.w,
             child: Container(
               width: circleRadius * 2,
               height: circleRadius * 2,
               decoration: BoxDecoration(
                 color: const Color.fromARGB(0, 218, 212, 212),
-                borderRadius: BorderRadius.circular(circleRadius = 40),
+                borderRadius: BorderRadius.circular(circleRadius = 40.r),
               ),
             ),
           ),
           Positioned(
-            top: 120,
+            top: 120.h,
             left: 0,
             child: Container(
-              width: 450,
-              height: 780,
+              width: 381.w,
+              height: 812.h,
               decoration: BoxDecoration(
                 color: Colors.transparent,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
               ),
               child: _savedReceipts.isNotEmpty
                   ? SingleChildScrollView(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.w),
                       child: Column(
                         children: [
-                          SizedBox(height: 20),
+                          SizedBox(height: 0.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
+                                    horizontal: 16.w, vertical: 8.h),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(16.r),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.grey.withOpacity(0.3),
@@ -357,15 +321,15 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                   underline: Container(),
                                   icon: Icon(Icons.arrow_drop_down),
                                   style: TextStyle(
-                                      fontSize: 16, color: Colors.orange),
+                                      fontSize: 16.sp, color: Colors.orange),
                                 ),
                               ),
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
+                                    horizontal: 16.w, vertical: 8.h),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16),
+                                  borderRadius: BorderRadius.circular(16.r),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.grey.withOpacity(0.3),
@@ -379,18 +343,18 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                   _selectedDateRange != null
                                       ? 'С ${DateFormat('dd.MM.yyyy').format(_selectedDateRange!.start)} по ${DateFormat('dd.MM.yyyy').format(_selectedDateRange!.end)}'
                                       : 'Выберите период',
-                                  style: TextStyle(fontSize: 16),
+                                  style: TextStyle(fontSize: 15.sp),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 20.h),
                           Container(
-                            height: 300,
-                            padding: EdgeInsets.all(16.0),
+                            height: 300.h,
+                            padding: EdgeInsets.all(16.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(16.0),
+                              borderRadius: BorderRadius.circular(16.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
@@ -403,7 +367,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: SizedBox(
-                                width: 1000,
+                                width: 1000.w,
                                 child: LineChart(
                                   LineChartData(
                                     gridData: FlGridData(
@@ -420,7 +384,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                       bottomTitles: AxisTitles(
                                         sideTitles: SideTitles(
                                           showTitles: true,
-                                          reservedSize: 32,
+                                          reservedSize: 32.h,
                                           interval: 1,
                                           getTitlesWidget: (value, meta) {
                                             final index = value.toInt();
@@ -428,7 +392,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                               return Container();
                                             return Text(
                                               _getMonths()[index - 1],
-                                              style: TextStyle(fontSize: 12),
+                                              style: TextStyle(fontSize: 12.sp),
                                             );
                                           },
                                         ),
@@ -440,10 +404,10 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                           getTitlesWidget: (value, meta) {
                                             return Text(
                                               value.toStringAsFixed(0),
-                                              style: TextStyle(fontSize: 12),
+                                              style: TextStyle(fontSize: 12.sp),
                                             );
                                           },
-                                          reservedSize: 60,
+                                          reservedSize: 60.h,
                                         ),
                                       ),
                                       rightTitles: AxisTitles(
@@ -478,12 +442,12 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 20.h),
                           Container(
-                            padding: EdgeInsets.all(16),
+                            padding: EdgeInsets.all(16.w),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(16.r),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.3),
@@ -501,10 +465,10 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                   children: [
                                     Text("Количество покупок",
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                             fontWeight: FontWeight.bold)),
                                     Text("${_getTotalPurchases()} шт.",
-                                        style: TextStyle(fontSize: 18)),
+                                        style: TextStyle(fontSize: 18.sp)),
                                   ],
                                 ),
                                 Column(
@@ -512,18 +476,19 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                   children: [
                                     Text("Потрачено",
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 16.sp,
                                             fontWeight: FontWeight.bold)),
                                     Text(
                                         "${_getTotalSpent().toStringAsFixed(2)} ₽",
                                         style: TextStyle(
-                                            fontSize: 18, color: Colors.red)),
+                                            fontSize: 18.sp,
+                                            color: Colors.red)),
                                   ],
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 16.h),
                           Column(
                             children: _getCategorySums().entries.map((entry) {
                               final totalSpent = _getTotalSpent();
@@ -537,10 +502,10 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 8.0),
                                 child: Container(
-                                  padding: EdgeInsets.all(16),
+                                  padding: EdgeInsets.all(16.w),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(16),
+                                    borderRadius: BorderRadius.circular(16.r),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.grey.withOpacity(0.3),
@@ -560,11 +525,11 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                         children: [
                                           Text(entry.key,
                                               style: TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: 16.sp,
                                                   fontWeight: FontWeight.bold)),
                                           Text("${purchaseCount} покупок",
                                               style: TextStyle(
-                                                  fontSize: 14,
+                                                  fontSize: 14.sp,
                                                   color: Colors.grey)),
                                         ],
                                       ),
@@ -575,28 +540,28 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                           Text(
                                               "${entry.value.toStringAsFixed(2)} ₽",
                                               style: TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: 16.sp,
                                                   color: Colors.red)),
                                           Text("$percentage%",
                                               style: TextStyle(
-                                                  fontSize: 14,
+                                                  fontSize: 14.sp,
                                                   color: Colors.grey)),
                                         ],
                                       ),
-                                      SizedBox(width: 16),
+                                      SizedBox(width: 16.w),
                                       Stack(
                                         alignment: Alignment.center,
                                         children: [
                                           CircularProgressIndicator(
                                             value: percentage / 100,
-                                            strokeWidth: 8,
+                                            strokeWidth: 8.w,
                                             backgroundColor: Colors.grey[300],
                                             color: Colors.blue,
                                           ),
                                           Text(
                                             "$percentage%",
                                             style: TextStyle(
-                                                fontSize: 14,
+                                                fontSize: 14.sp,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ],
@@ -612,21 +577,58 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                     )
                   : Center(
                       child: Text('Нет данных для отображения',
-                          style: TextStyle(fontSize: 18, color: Colors.grey)),
+                          style:
+                              TextStyle(fontSize: 18.sp, color: Colors.grey)),
                     ),
             ),
           ),
           Positioned(
-            bottom: 30,
-            right: 186,
+            bottom: 22.h,
+            right: 155.w,
             child: SvgPicture.asset(
               'assets/3.svg',
-              width: 83,
-              height: 83,
+              width: 70.w,
+              height: 70.h,
             ),
           ),
           Positioned(
-            bottom: 41.0,
+            bottom: 22.h,
+            right: 20.w,
+            child: InkWell(
+              onTap: () => _openSettings(context),
+              child: Container(
+                width: 56.w,
+                height: 56.h,
+                color: Colors.transparent,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 22.h,
+            right: 85.w,
+            child: InkWell(
+              onTap: () => _navigateToKnowledge(context),
+              child: Container(
+                width: 56.w,
+                height: 56.h,
+                color: Colors.transparent,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 22.h,
+            left: 22.w,
+            child: InkWell(
+              onTap: () => _openSavedScreen(context),
+              child: Container(
+                width: 56.w,
+                height: 56.h,
+                color: Colors.transparent,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 22.h,
             left: 0,
             right: 0,
             child: Center(
@@ -634,7 +636,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 onPressed: _pickImage,
                 style: ElevatedButton.styleFrom(
                   padding:
-                      EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
+                      EdgeInsets.symmetric(horizontal: 40.w, vertical: 20.h),
                   shape: CircleBorder(),
                   backgroundColor: Colors.transparent,
                   side: BorderSide.none,
@@ -642,7 +644,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 ),
                 child: Icon(
                   Icons.camera_alt,
-                  size: 33,
+                  size: 33.w,
                   color: Colors.transparent,
                 ),
               ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iphone/NavBar.dart';
 import 'package:iphone/Pages.dart';
 
@@ -39,21 +39,21 @@ class KnowledgeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          SvgPicture.asset(
-            'assets/knowledge.svg',
+          Image.asset(
+            'assets/knowledge.png',
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
           ),
           NavBar(),
           Positioned(
-            top: 145,
-            left: 13,
+            top: 145.h,
+            left: 13.w,
             child: GestureDetector(
               onTap: () => _navigateToPage1(context),
               child: Container(
-                width: 202,
-                height: 350,
+                width: 202.w,
+                height: 350.h,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),
@@ -61,13 +61,13 @@ class KnowledgeScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 145,
-            right: 13,
+            top: 145.h,
+            right: 13.w,
             child: GestureDetector(
               onTap: () => _navigateToPage2(context),
               child: Container(
-                width: 202,
-                height: 350,
+                width: 202.w,
+                height: 350.h,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),
@@ -75,13 +75,13 @@ class KnowledgeScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 130,
-            left: 13,
+            bottom: 130.h,
+            left: 13.w,
             child: GestureDetector(
               onTap: () => _navigateToPage3(context),
               child: Container(
-                width: 202,
-                height: 350,
+                width: 202.w,
+                height: 350.h,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),
@@ -89,13 +89,13 @@ class KnowledgeScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: 130,
-            right: 13,
+            bottom: 130.h,
+            right: 13.w,
             child: GestureDetector(
               onTap: () => _navigateToPage4(context),
               child: Container(
-                width: 202,
-                height: 350,
+                width: 202.w,
+                height: 350.h,
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),

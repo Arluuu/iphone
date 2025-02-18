@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Приложению нужен доступ к камере телефона чтобы вы могли сделать фото чеков.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Приложению нужен доступ к фотоальбому чтобы вы могли выбрать фото чеков.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Приложению нужен доступ к микрофону для работы с камерой вашего телефона. Запись звука производится не будет.</string>
 </dict>
 </plist>

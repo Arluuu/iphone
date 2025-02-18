@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:device_preview_plus/device_preview_plus.dart';
 import 'package:iphone/SavedScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,7 +14,12 @@ void main() async {
     await prefs.setBool('isFirstLaunch', false);
   }
 
-  runApp(MyApp(isFirstLaunch: isFirstLaunch));
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MyApp(isFirstLaunch: isFirstLaunch),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,15 +29,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Image Slider',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SplashScreen(isFirstLaunch: isFirstLaunch),
-      routes: {
-        '/onboarding': (context) => ImageSliderScreen(),
-        '/saved2': (context) => SavedScreen(),
+    return ScreenUtilInit(
+      designSize: Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'Image Slider',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: SplashScreen(isFirstLaunch: isFirstLaunch),
+          routes: {
+            '/onboarding': (context) => ImageSliderScreen(),
+            '/saved2': (context) => SavedScreen(),
+          },
+        );
       },
     );
   }
@@ -65,8 +79,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SvgPicture.asset(
-          'assets/launch1.svg',
+        child: Image.asset(
+          'assets/launch.png',
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,
@@ -88,9 +102,9 @@ class ImageSliderScreenState extends State<ImageSliderScreen> {
   int _currentPage = 0;
 
   final List<String> _images = [
-    'assets/onboarding 41.png',
-    'assets/onboarding 42.png',
-    'assets/onboarding 43.png',
+    'assets/onboarding_41.png',
+    'assets/onboarding_42.png',
+    'assets/onboarding_43.png',
   ];
 
   void _skipOnboarding() {
@@ -131,22 +145,22 @@ class ImageSliderScreenState extends State<ImageSliderScreen> {
           ),
           if (_currentPage < _images.length - 1)
             Positioned(
-              top: 65.0,
-              right: 5.0,
+              top: 65.h,
+              right: 5.w,
               child: TextButton(
                 onPressed: _skipOnboarding,
                 child: Text(
                   'Пропустить',
                   style: TextStyle(
                     color: Colors.transparent,
-                    fontSize: 16.0,
+                    fontSize: 16.sp,
                   ),
                 ),
               ),
             ),
           Positioned(
-            bottom: 87.0,
-            right: 20.0,
+            bottom: 87.h,
+            right: 20.w,
             child: Opacity(
               opacity: 0.0,
               child: FloatingActionButton(

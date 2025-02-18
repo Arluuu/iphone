@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iphone/NavBar.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -10,66 +10,66 @@ class SettingsScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          SvgPicture.asset(
-            'assets/settings.svg',
+          Image.asset(
+            'assets/settings.png',
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
           ),
           NavBar(),
           Positioned(
-            top: 154,
-            left: 13,
+            top: 125.h,
+            left: 13.w,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
                 elevation: 0,
-                minimumSize: Size(430, 70),
+                minimumSize: Size(346.w, 60.h),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(5.r),
                   side: BorderSide.none,
                 ),
               ),
               onPressed: () {},
               child: Text(
                 '',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black, fontSize: 16.sp),
               ),
             ),
           ),
           Positioned(
-            top: 243,
-            left: 13,
+            top: 195.h,
+            left: 13.w,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
                 elevation: 0,
-                minimumSize: Size(430, 70),
+                minimumSize: Size(346.w, 60.h),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(5.r),
                 ),
               ),
               onPressed: () {},
-              child: Text(''),
+              child: Text('', style: TextStyle(fontSize: 16.sp)),
             ),
           ),
           Positioned(
-            top: 350,
-            left: 13,
+            top: 280.h,
+            left: 13.w,
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
                 elevation: 0,
-                minimumSize: Size(430, 70),
+                minimumSize: Size(346.w, 60.h),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(5.r),
                 ),
               ),
               onPressed: () {},
-              child: Text(''),
+              child: Text('', style: TextStyle(fontSize: 16.sp)),
             ),
           ),
         ],

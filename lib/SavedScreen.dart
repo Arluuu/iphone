@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iphone/EditReceiptScreen.dart';
 import 'package:iphone/ExpensesScreen.dart';
 import 'package:iphone/Knowledge.dart';
-import 'package:iphone/Settings.dart';
+import 'package:iphone/Sett.dart';
 import 'package:iphone/photki.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -174,86 +174,86 @@ class _SavedScreenState extends State<SavedScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          SvgPicture.asset(
+          Image.asset(
             _savedReceipts.isNotEmpty
-                ? 'assets/saved2.svg'
-                : 'assets/saved.svg',
+                ? 'assets/saved2.png'
+                : 'assets/saved.png',
             fit: BoxFit.cover,
             width: double.infinity,
             height: double.infinity,
           ),
           Positioned(
-            bottom: 35,
-            left: 110,
+            bottom: 35.h,
+            left: 110.w,
             child: GestureDetector(
               onTap: () => _ExpensesScreen(context),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
                   '',
-                  style: TextStyle(color: Colors.transparent, fontSize: 16),
+                  style: TextStyle(color: Colors.transparent, fontSize: 16.sp),
                 ),
               ),
             ),
           ),
           Positioned(
-            bottom: 35,
-            right: 105,
+            bottom: 35.h,
+            right: 105.w,
             child: GestureDetector(
               onTap: () => _navigateToKnowledge(context),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
                   '',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
               ),
             ),
           ),
           Positioned(
-            bottom: 35,
-            right: 25,
+            bottom: 35.h,
+            right: 25.w,
             child: GestureDetector(
               onTap: () => _openSettings(context),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
                   '',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
               ),
             ),
           ),
           Positioned(
-            top: 153,
-            left: 67,
-            right: 20,
+            top: 120.h,
+            left: 67.w,
+            right: 20.w,
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: 'Поиск по названию',
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                   borderSide: BorderSide.none,
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                   borderSide: BorderSide.none,
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(10.r),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
@@ -262,8 +262,8 @@ class _SavedScreenState extends State<SavedScreen> {
             ),
           ),
           Positioned(
-            top: 153,
-            right: 25,
+            top: 121.h,
+            right: 20.w,
             child: PopupMenuButton<String>(
               onSelected: _toggleSortOrder,
               itemBuilder: (BuildContext context) {
@@ -275,11 +275,11 @@ class _SavedScreenState extends State<SavedScreen> {
                 }).toList();
               },
               child: Container(
-                width: 50,
-                height: 50,
+                width: 50.w,
+                height: 50.h,
                 decoration: BoxDecoration(
                   color: Colors.orange,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Center(
                   child: Icon(
@@ -291,17 +291,17 @@ class _SavedScreenState extends State<SavedScreen> {
             ),
           ),
           Positioned(
-            top: 215,
-            left: 20,
-            right: 20,
-            bottom: 100,
+            top: 170.h,
+            left: 20.w,
+            right: 20.w,
+            bottom: 100.h,
             child: _filteredReceipts.isNotEmpty
                 ? ListView.builder(
                     itemCount: _filteredReceipts.length,
                     itemBuilder: (context, index) {
                       final receipt = _filteredReceipts[index];
                       return Card(
-                        margin: EdgeInsets.symmetric(vertical: 10),
+                        margin: EdgeInsets.symmetric(vertical: 10.h),
                         child: ListTile(
                           leading: receipt['imagePath'].isNotEmpty
                               ? Image.file(File(receipt['imagePath']))
@@ -332,33 +332,33 @@ class _SavedScreenState extends State<SavedScreen> {
                 : Center(
                     child: Text(
                       '',
-                      style: TextStyle(fontSize: 18, color: Colors.grey),
+                      style: TextStyle(fontSize: 18.sp, color: Colors.grey),
                     ),
                   ),
           ),
           Positioned(
-            bottom: 30,
-            right: 186,
+            bottom: 22.h,
+            right: 155.w,
             child: SvgPicture.asset(
               'assets/3.svg',
-              width: 83,
-              height: 83,
+              width: 70.w,
+              height: 70.h,
             ),
           ),
           Positioned(
-            bottom: 50,
-            left: 195,
+            bottom: 35.h,
+            left: 158.w,
             child: GestureDetector(
               onTap: () => _openCamera(context),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: Text(
                   '',
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
               ),
             ),

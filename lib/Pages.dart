@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Page1Screen extends StatefulWidget {
   const Page1Screen({super.key});
@@ -57,26 +57,26 @@ class Page1ScreenState extends State<Page1Screen> {
       body: Stack(
         children: [
           Center(
-            child: SvgPicture.asset(
-              'assets/fingram.svg',
+            child: Image.asset(
+              'assets/fingram.png',
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
             ),
           ),
           Positioned(
-            top: 74.0,
-            left: 10.0,
+            top: 74.h,
+            left: 10.w,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
               color: Colors.transparent,
-              iconSize: 30.0,
+              iconSize: 30.w,
             ),
           ),
           Column(
             children: [
-              SizedBox(height: 130.0),
+              SizedBox(height: 100.h),
               Expanded(
                 child: DraggableScrollableSheet(
                   expand: true,
@@ -87,35 +87,35 @@ class Page1ScreenState extends State<Page1Screen> {
                       controller: scrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.w),
                       children: [
                         ...List.generate(_containerTitles.length, (index) {
                           return Card(
                             elevation: 2,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(8.r),
                             ),
-                            margin: EdgeInsets.symmetric(vertical: 8.0),
+                            margin: EdgeInsets.symmetric(vertical: 8.h),
                             child: ExpansionTile(
                               title: Text(
                                 _containerTitles[index],
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 16.sp,
                                   color: _containerColors[index],
                                 ),
                               ),
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(16.0),
+                                  padding: EdgeInsets.all(16.w),
                                   child: IntrinsicHeight(
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                          width: 4.0,
+                                          width: 4.w,
                                           color: _containerColors[index],
-                                          margin: EdgeInsets.only(right: 8.0),
+                                          margin: EdgeInsets.only(right: 8.w),
                                         ),
                                         Expanded(
                                           child: Text.rich(
@@ -130,7 +130,7 @@ class Page1ScreenState extends State<Page1Screen> {
                                                           ' ',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -145,7 +145,7 @@ class Page1ScreenState extends State<Page1Screen> {
                                                           .join(' '),
                                                   style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                   ),
                                                 ),
                                               ],
@@ -165,24 +165,24 @@ class Page1ScreenState extends State<Page1Screen> {
                           return Card(
                             elevation: 2,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                              borderRadius: BorderRadius.circular(8.r),
                             ),
-                            margin: EdgeInsets.symmetric(vertical: 8.0),
+                            margin: EdgeInsets.symmetric(vertical: 8.h),
                             child: ExpansionTile(
                               title: Text(
                                 _bottomContainerTitles[index],
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 14.sp,
                                   color: Colors.black,
                                 ),
                               ),
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(16.0),
+                                  padding: EdgeInsets.all(16.w),
                                   child: Text(
                                     _bottomContainerTexts[index],
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize: 14.sp,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -247,26 +247,26 @@ class Page2Screen extends StatelessWidget {
       body: Stack(
         children: [
           Center(
-            child: SvgPicture.asset(
-              'assets/zashita.svg',
+            child: Image.asset(
+              'assets/zashita.png',
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
             ),
           ),
           Positioned(
-            top: 74.0,
-            left: 10.0,
+            top: 74.h,
+            left: 10.w,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
               color: Colors.transparent,
-              iconSize: 30.0,
+              iconSize: 30.w,
             ),
           ),
           Column(
             children: [
-              SizedBox(height: 130.0),
+              SizedBox(height: 100.h),
               Expanded(
                 child: DraggableScrollableSheet(
                   expand: true,
@@ -277,34 +277,34 @@ class Page2Screen extends StatelessWidget {
                       controller: scrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.w),
                       children: List.generate(_containerTitles.length, (index) {
                         return Card(
                           elevation: 2,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(8.r),
                           ),
-                          margin: EdgeInsets.symmetric(vertical: 8.0),
+                          margin: EdgeInsets.symmetric(vertical: 8.h),
                           child: ExpansionTile(
                             title: Text(
                               _containerTitles[index],
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 color: _containerColors[index],
                               ),
                             ),
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(16.0),
+                                padding: EdgeInsets.all(16.w),
                                 child: IntrinsicHeight(
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        width: 4.0,
+                                        width: 4.w,
                                         color: _containerColors[index],
-                                        margin: EdgeInsets.only(right: 8.0),
+                                        margin: EdgeInsets.only(right: 8.w),
                                       ),
                                       Expanded(
                                         child: Text.rich(
@@ -315,7 +315,7 @@ class Page2Screen extends StatelessWidget {
                                                   text: 'Право на возврат ',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -325,7 +325,7 @@ class Page2Screen extends StatelessWidget {
                                                           ''),
                                                   style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                   ),
                                                 ),
                                               ] else if (index == 1) ...[
@@ -334,7 +334,7 @@ class Page2Screen extends StatelessWidget {
                                                       'Как бороться с мошенничеством ',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -344,7 +344,7 @@ class Page2Screen extends StatelessWidget {
                                                           ''),
                                                   style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                   ),
                                                 ),
                                               ] else if (index == 2) ...[
@@ -353,7 +353,7 @@ class Page2Screen extends StatelessWidget {
                                                       'Особенности покупки в рассрочку ',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -363,7 +363,7 @@ class Page2Screen extends StatelessWidget {
                                                           ''),
                                                   style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                   ),
                                                 ),
                                               ] else ...[
@@ -374,7 +374,7 @@ class Page2Screen extends StatelessWidget {
                                                       ' ',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -384,7 +384,7 @@ class Page2Screen extends StatelessWidget {
                                                       .join(' '),
                                                   style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14,
+                                                    fontSize: 14.sp,
                                                   ),
                                                 ),
                                               ],
@@ -429,26 +429,26 @@ class Page3Screen extends StatelessWidget {
       body: Stack(
         children: [
           Center(
-            child: SvgPicture.asset(
-              'assets/sovet.svg',
+            child: Image.asset(
+              'assets/sovet.png',
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
             ),
           ),
           Positioned(
-            top: 74.0,
-            left: 10.0,
+            top: 74.h,
+            left: 10.w,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
               color: Colors.transparent,
-              iconSize: 30.0,
+              iconSize: 30.w,
             ),
           ),
           Column(
             children: [
-              SizedBox(height: 130.0),
+              SizedBox(height: 100.h),
               Expanded(
                 child: DraggableScrollableSheet(
                   expand: true,
@@ -459,41 +459,41 @@ class Page3Screen extends StatelessWidget {
                       controller: scrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.w),
                       children: [
                         Card(
                           elevation: 2,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(8.r),
                           ),
-                          margin: EdgeInsets.symmetric(vertical: 8.0),
+                          margin: EdgeInsets.symmetric(vertical: 8.h),
                           child: ExpansionTile(
                             title: Text(
                               _containerTitle,
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 color: _containerColor,
                               ),
                             ),
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(16.0),
+                                padding: EdgeInsets.all(16.w),
                                 child: IntrinsicHeight(
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        width: 4.0,
+                                        width: 4.w,
                                         color: _containerColor,
-                                        margin: EdgeInsets.only(right: 8.0),
+                                        margin: EdgeInsets.only(right: 8.w),
                                       ),
                                       Expanded(
                                         child: Text(
                                           _containerText,
                                           style: TextStyle(
                                             color: Colors.grey,
-                                            fontSize: 14,
+                                            fontSize: 14.sp,
                                           ),
                                         ),
                                       ),
@@ -543,26 +543,26 @@ class Page4Screen extends StatelessWidget {
       body: Stack(
         children: [
           Center(
-            child: SvgPicture.asset(
-              'assets/zashitadannih.svg',
+            child: Image.asset(
+              'assets/zashitadannih.png',
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
             ),
           ),
           Positioned(
-            top: 74.0,
-            left: 10.0,
+            top: 74.h,
+            left: 10.w,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
               color: Colors.transparent,
-              iconSize: 30.0,
+              iconSize: 30.w,
             ),
           ),
           Column(
             children: [
-              SizedBox(height: 130.0),
+              SizedBox(height: 100.h),
               Expanded(
                 child: DraggableScrollableSheet(
                   expand: true,
@@ -573,41 +573,41 @@ class Page4Screen extends StatelessWidget {
                       controller: scrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
-                      padding: const EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(16.w),
                       children: List.generate(_containerTitles.length, (index) {
                         return Card(
                           elevation: 2,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
+                            borderRadius: BorderRadius.circular(8.r),
                           ),
-                          margin: EdgeInsets.symmetric(vertical: 8.0),
+                          margin: EdgeInsets.symmetric(vertical: 8.h),
                           child: ExpansionTile(
                             title: Text(
                               _containerTitles[index],
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 16.sp,
                                 color: _containerColors[index],
                               ),
                             ),
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(16.0),
+                                padding: EdgeInsets.all(16.w),
                                 child: IntrinsicHeight(
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        width: 4.0,
+                                        width: 4.w,
                                         color: _containerColors[index],
-                                        margin: EdgeInsets.only(right: 8.0),
+                                        margin: EdgeInsets.only(right: 8.w),
                                       ),
                                       Expanded(
                                         child: Text(
                                           _containerTexts[index],
                                           style: TextStyle(
                                             color: Colors.grey,
-                                            fontSize: 14,
+                                            fontSize: 14.sp,
                                           ),
                                         ),
                                       ),

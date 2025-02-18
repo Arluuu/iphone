@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditReceiptScreen extends StatefulWidget {
@@ -85,47 +86,37 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
       body: Stack(
         children: [
           Positioned.fill(
-            child: SvgPicture.asset(
-              'assets/redaktor.svg',
+            child: Image.asset(
+              'assets/redaktor.png',
               fit: BoxFit.cover,
             ),
           ),
-          Positioned(
-            top: 74.0,
-            left: 10.0,
-            child: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () => Navigator.of(context).pop(),
-              color: Colors.black,
-              iconSize: 30.0,
-            ),
-          ),
           SingleChildScrollView(
-            padding: EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 150.0),
+                SizedBox(height: 150.h),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(16.0),
+                    borderRadius: BorderRadius.circular(16.r),
                     border: Border.all(color: Colors.grey),
                   ),
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.w),
                   width: double.infinity,
                   child: Column(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(16.0),
+                        borderRadius: BorderRadius.circular(16.r),
                         child: Image.file(
                           File(_currentImage.path),
-                          width: 200.0,
-                          height: 200.0,
+                          width: 200.w,
+                          height: 200.h,
                           fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(height: 16.0),
+                      SizedBox(height: 16.h),
                       TextButton(
                         onPressed: _pickImage,
                         child: Text(
@@ -136,7 +127,7 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 16.h),
                 _buildInputField(
                     'Название покупки', 'Название', _nameController),
                 _buildDatePicker(
@@ -146,7 +137,7 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
                 _buildInputField(
                     'Категория', '#Категория покупки', _categoryController),
                 _buildInputField('Магазин', 'Место покупки', _storeController),
-                SizedBox(height: 16.0),
+                SizedBox(height: 16.h),
                 Row(
                   children: [
                     Checkbox(
@@ -165,24 +156,43 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
                       'Дата окончания гарантии', _warrantyDateController),
                 _buildInputField('Описание', 'Краткое описание покупки',
                     _descriptionController, null),
-                SizedBox(height: 16.0),
+                SizedBox(height: 16.h),
                 Center(
                   child: ElevatedButton(
                     onPressed: _isFormValid ? _saveEditedReceipt : null,
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 40.0, vertical: 20.0),
-                      fixedSize: Size(343.0, 65.0),
+                          horizontal: 40.w, vertical: 20.h),
+                      fixedSize: Size(343.w, 65.h),
                       backgroundColor:
                           _isFormValid ? Colors.orange : Colors.grey,
                     ),
                     child: Text(
                       'Сохранить',
-                      style: TextStyle(fontSize: 20.0),
+                      style: TextStyle(fontSize: 20.sp),
                     ),
                   ),
                 ),
               ],
+            ),
+          ),
+          Positioned(
+            top: 0.h,
+            right: 13.w,
+            child: SvgPicture.asset(
+              'assets/statbar.svg',
+              width: 300.w,
+              height: 100.h,
+            ),
+          ),
+          Positioned(
+            top: 57.h,
+            left: 4.w,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => Navigator.of(context).pop(),
+              color: Colors.transparent,
+              iconSize: 30.w,
             ),
           ),
         ],
@@ -197,7 +207,7 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label),
-        SizedBox(height: 8.0),
+        SizedBox(height: 8.h),
         TextField(
           controller: controller,
           keyboardType: keyboardType,
@@ -206,17 +216,17 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
             hintText: hint,
             border: InputBorder.none,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 2.0),
+              borderSide: BorderSide(color: Colors.grey, width: 2.w),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.orange, width: 2.0),
+              borderSide: BorderSide(color: Colors.orange, width: 2.w),
             ),
           ),
           onChanged: (value) {
             setState(() {});
           },
         ),
-        SizedBox(height: 16.0),
+        SizedBox(height: 16.h),
       ],
     );
   }
@@ -227,17 +237,17 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label),
-        SizedBox(height: 8.0),
+        SizedBox(height: 8.h),
         TextField(
           controller: controller,
           decoration: InputDecoration(
             hintText: hint,
             border: InputBorder.none,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 2.0),
+              borderSide: BorderSide(color: Colors.grey, width: 2.w),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.orange, width: 2.0),
+              borderSide: BorderSide(color: Colors.orange, width: 2.w),
             ),
           ),
           readOnly: true,
@@ -258,7 +268,7 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
             setState(() {});
           },
         ),
-        SizedBox(height: 16.0),
+        SizedBox(height: 16.h),
       ],
     );
   }
