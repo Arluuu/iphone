@@ -88,9 +88,9 @@ class ImageSliderScreenState extends State<ImageSliderScreen> {
   int _currentPage = 0;
 
   final List<String> _images = [
-    'assets/onboarding 41.svg',
-    'assets/onboarding 42.svg',
-    'assets/onboarding 43.svg',
+    'assets/onboarding 41.png',
+    'assets/onboarding 42.png',
+    'assets/onboarding 43.png',
   ];
 
   void _skipOnboarding() {
@@ -121,7 +121,7 @@ class ImageSliderScreenState extends State<ImageSliderScreen> {
               });
             },
             children: _images.map((image) {
-              return SvgPicture.asset(
+              return Image.asset(
                 image,
                 fit: BoxFit.cover,
                 width: double.infinity,
