@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:iphone/Knowledge.dart';
-import 'package:iphone/SavedScreen.dart';
-import 'package:iphone/Sett.dart';
-import 'package:iphone/photki.dart';
+import 'package:iphone/NavBar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 
@@ -22,49 +18,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   String _selectedPeriod = "Месяц";
   double circleRadius = 25;
   XFile? _image;
-
-  ////////////////////
-  void _openSettings(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SettingsScreen()),
-    );
-  }
-
-  void _navigateToKnowledge(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => KnowledgeScreen()),
-    );
-  }
-
-  void _openSavedScreen(BuildContext context) {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => SavedScreen()),
-    );
-  }
-
-  Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
-    if (image != null) {
-      setState(() {
-        _image = image;
-      });
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => PurchaseDetailsScreen(
-            image: image,
-            onSave: (purchaseData) {
-              print("Покупка сохранена: $purchaseData");
-            },
-          ),
-        ),
-      );
-    }
-  }
+  int _currentIndex = 2;
 
   @override
   void initState() {
@@ -254,6 +208,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
           Positioned.fill(
             child: Image.asset(
               'assets/Expenses.png',
+              width: 375.w,
+              height: 812.h,
               fit: BoxFit.cover,
             ),
           ),
@@ -583,71 +539,16 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
             ),
           ),
           Positioned(
-            bottom: 22.h,
-            right: 155.w,
-            child: SvgPicture.asset(
-              'assets/3.svg',
-              width: 70.w,
-              height: 70.h,
-            ),
-          ),
-          Positioned(
-            bottom: 22.h,
-            right: 20.w,
-            child: InkWell(
-              onTap: () => _openSettings(context),
-              child: Container(
-                width: 56.w,
-                height: 56.h,
-                color: Colors.transparent,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 22.h,
-            right: 85.w,
-            child: InkWell(
-              onTap: () => _navigateToKnowledge(context),
-              child: Container(
-                width: 56.w,
-                height: 56.h,
-                color: Colors.transparent,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 22.h,
-            left: 22.w,
-            child: InkWell(
-              onTap: () => _openSavedScreen(context),
-              child: Container(
-                width: 56.w,
-                height: 56.h,
-                color: Colors.transparent,
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 22.h,
+            bottom: 0,
             left: 0,
             right: 0,
-            child: Center(
-              child: ElevatedButton(
-                onPressed: _pickImage,
-                style: ElevatedButton.styleFrom(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 40.w, vertical: 20.h),
-                  shape: CircleBorder(),
-                  backgroundColor: Colors.transparent,
-                  side: BorderSide.none,
-                  elevation: 0,
-                ),
-                child: Icon(
-                  Icons.camera_alt,
-                  size: 33.w,
-                  color: Colors.transparent,
-                ),
-              ),
+            child: CustomNavBar(
+              currentIndex: _currentIndex,
+              onTap: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
             ),
           ),
         ],

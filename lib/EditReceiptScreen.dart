@@ -88,6 +88,8 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
           Positioned.fill(
             child: Image.asset(
               'assets/redaktor.png',
+              width: 375.w,
+              height: 812.h,
               fit: BoxFit.cover,
             ),
           ),

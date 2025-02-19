@@ -3,8 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iphone/NavBar.dart';
 import 'package:iphone/Pages.dart';
 
-class KnowledgeScreen extends StatelessWidget {
+class KnowledgeScreen extends StatefulWidget {
   const KnowledgeScreen({super.key});
+
+  @override
+  _KnowledgeScreenState createState() => _KnowledgeScreenState();
+}
+
+class _KnowledgeScreenState extends State<KnowledgeScreen> {
+  int _currentIndex = 3;
 
   void _navigateToPage1(BuildContext context) {
     Navigator.push(
@@ -41,11 +48,10 @@ class KnowledgeScreen extends StatelessWidget {
         children: [
           Image.asset(
             'assets/knowledge.png',
+            width: 375.w,
+            height: 812.h,
             fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
           ),
-          NavBar(),
           Positioned(
             top: 145.h,
             left: 13.w,
@@ -100,6 +106,19 @@ class KnowledgeScreen extends StatelessWidget {
                   color: Colors.transparent,
                 ),
               ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: CustomNavBar(
+              currentIndex: _currentIndex,
+              onTap: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
             ),
           ),
         ],

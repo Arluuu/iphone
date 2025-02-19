@@ -59,9 +59,9 @@ class Page1ScreenState extends State<Page1Screen> {
           Center(
             child: Image.asset(
               'assets/fingram.png',
+              width: 375.w,
+              height: 812.h,
               fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
             ),
           ),
           Positioned(
@@ -249,9 +249,9 @@ class Page2Screen extends StatelessWidget {
           Center(
             child: Image.asset(
               'assets/zashita.png',
+              width: 375.w,
+              height: 812.h,
               fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
             ),
           ),
           Positioned(
@@ -431,9 +431,9 @@ class Page3Screen extends StatelessWidget {
           Center(
             child: Image.asset(
               'assets/sovet.png',
+              width: 375.w,
+              height: 812.h,
               fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
             ),
           ),
           Positioned(
@@ -545,9 +545,9 @@ class Page4Screen extends StatelessWidget {
           Center(
             child: Image.asset(
               'assets/zashitadannih.png',
+              width: 375.w,
+              height: 812.h,
               fit: BoxFit.cover,
-              width: double.infinity,
-              height: double.infinity,
             ),
           ),
           Positioned(

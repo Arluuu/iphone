@@ -2,12 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iphone/EditReceiptScreen.dart';
-import 'package:iphone/ExpensesScreen.dart';
-import 'package:iphone/Knowledge.dart';
-import 'package:iphone/Sett.dart';
+import 'package:iphone/NavBar.dart';
 import 'package:iphone/photki.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -23,6 +20,7 @@ class _SavedScreenState extends State<SavedScreen> {
   List<Map<String, dynamic>> _filteredReceipts = [];
   final TextEditingController _searchController = TextEditingController();
   bool _sortNewFirst = true;
+  int _currentIndex = 1;
 
   @override
   void initState() {
@@ -93,27 +91,6 @@ class _SavedScreenState extends State<SavedScreen> {
     }
   }
 
-  void _navigateToKnowledge(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => KnowledgeScreen()),
-    );
-  }
-
-  void _ExpensesScreen(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ExpensesScreen()),
-    );
-  }
-
-  void _openSettings(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => SettingsScreen()),
-    );
-  }
-
   void _editReceipt(int index) async {
     final receipt = _savedReceipts[index];
     final updatedReceipt = await Navigator.push(
@@ -178,114 +155,60 @@ class _SavedScreenState extends State<SavedScreen> {
             _savedReceipts.isNotEmpty
                 ? 'assets/saved2.png'
                 : 'assets/saved.png',
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: double.infinity,
+            width: 1.sw,
+            height: 1.sh,
+            fit: BoxFit.fill,
           ),
           Positioned(
-            bottom: 35.h,
-            left: 110.w,
-            child: GestureDetector(
-              onTap: () => _ExpensesScreen(context),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Text(
-                  '',
-                  style: TextStyle(color: Colors.transparent, fontSize: 16.sp),
-                ),
+            top: MediaQuery.of(context).padding.top + 85.h,
+            left: 50.w,
+            right: 80.w,
+            child: Container(
+              height: 45.h,
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                    hintText: 'Поиск по названию',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.r),
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.r),
+                      borderSide: BorderSide.none,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.r),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.transparent),
               ),
             ),
           ),
           Positioned(
-            bottom: 35.h,
-            right: 105.w,
-            child: GestureDetector(
-              onTap: () => _navigateToKnowledge(context),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Text(
-                  '',
-                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 35.h,
-            right: 25.w,
-            child: GestureDetector(
-              onTap: () => _openSettings(context),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Text(
-                  '',
-                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: 120.h,
-            left: 67.w,
+            top: MediaQuery.of(context).padding.top + 78.h,
             right: 20.w,
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                hintText: 'Поиск по названию',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
-                  borderSide: BorderSide.none,
-                ),
-                filled: true,
-                fillColor: Colors.transparent,
+            child: Container(
+              width: 45.w,
+              height: 45.h,
+              decoration: BoxDecoration(
+                color: Colors.orange,
+                borderRadius: BorderRadius.circular(8.r),
               ),
-            ),
-          ),
-          Positioned(
-            top: 121.h,
-            right: 20.w,
-            child: PopupMenuButton<String>(
-              onSelected: _toggleSortOrder,
-              itemBuilder: (BuildContext context) {
-                return ['Сначала новые', 'Сначала старые'].map((String choice) {
-                  return PopupMenuItem<String>(
-                    value: choice,
-                    child: Text(choice),
-                  );
-                }).toList();
-              },
-              child: Container(
-                width: 50.w,
-                height: 50.h,
-                decoration: BoxDecoration(
-                  color: Colors.orange,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
+              child: PopupMenuButton<String>(
+                onSelected: _toggleSortOrder,
+                itemBuilder: (BuildContext context) {
+                  return ['Сначала новые', 'Сначала старые']
+                      .map((String choice) {
+                    return PopupMenuItem<String>(
+                      value: choice,
+                      child: Text(choice),
+                    );
+                  }).toList();
+                },
                 child: Center(
-                  child: Icon(
-                    Icons.sort,
-                    color: Colors.white,
-                  ),
+                  child: Icon(Icons.sort, color: Colors.white),
                 ),
               ),
             ),
@@ -337,30 +260,16 @@ class _SavedScreenState extends State<SavedScreen> {
                   ),
           ),
           Positioned(
-            bottom: 22.h,
-            right: 155.w,
-            child: SvgPicture.asset(
-              'assets/3.svg',
-              width: 70.w,
-              height: 70.h,
-            ),
-          ),
-          Positioned(
-            bottom: 35.h,
-            left: 158.w,
-            child: GestureDetector(
-              onTap: () => _openCamera(context),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Text(
-                  '',
-                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                ),
-              ),
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: CustomNavBar(
+              currentIndex: _currentIndex,
+              onTap: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
             ),
           ),
         ],

@@ -87,10 +87,11 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
           Positioned.fill(
             child: Image.asset(
               'assets/pustaya.png',
+              width: 375.w,
+              height: 812.h,
               fit: BoxFit.cover,
             ),
           ),
-          NavBar(),
           SingleChildScrollView(
             padding: EdgeInsets.all(16.w),
             child: Column(

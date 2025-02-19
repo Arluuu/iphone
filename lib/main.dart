@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(375, 812),
+      designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
@@ -81,9 +81,9 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Center(
         child: Image.asset(
           'assets/launch.png',
+          width: 375.w,
+          height: 812.h,
           fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
         ),
       ),
     );
