@@ -24,26 +24,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize:
+          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      minTextAdapt: true,
+    );
+
     return Scaffold(
       body: Stack(
         children: [
           Image.asset(
             'assets/settings.png',
-            width: 375.w,
-            height: 812.h,
-            fit: BoxFit.cover,
+            width: ScreenUtil().screenWidth,
+            height: ScreenUtil().screenHeight,
+            fit: BoxFit.fill,
           ),
           Positioned(
-            top: 125.h,
-            left: 13.w,
+            top: ScreenUtil().setHeight(125),
+            left: ScreenUtil().setWidth(13),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
                 elevation: 0,
-                minimumSize: Size(346.w, 60.h),
+                minimumSize: Size(
+                    ScreenUtil().setWidth(346), ScreenUtil().setHeight(60)),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
                   side: BorderSide.none,
                 ),
               ),
@@ -53,51 +61,55 @@ class _SettingsScreenState extends State<SettingsScreen> {
               },
               child: Text(
                 '',
-                style: TextStyle(color: Colors.black, fontSize: 16.sp),
+                style: TextStyle(
+                    color: Colors.black, fontSize: ScreenUtil().setSp(16)),
               ),
             ),
           ),
           Positioned(
-            top: 195.h,
-            left: 13.w,
+            top: ScreenUtil().setHeight(195),
+            left: ScreenUtil().setWidth(13),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
                 elevation: 0,
-                minimumSize: Size(346.w, 60.h),
+                minimumSize: Size(
+                    ScreenUtil().setWidth(346), ScreenUtil().setHeight(60)),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
                 ),
               ),
               onPressed: () {
                 _launchURL(
                     'https://www.google.com'); // Замените на "Политика конфиденциальности"
               },
-              child: Text('', style: TextStyle(fontSize: 16.sp)),
+              child:
+                  Text('', style: TextStyle(fontSize: ScreenUtil().setSp(16))),
             ),
           ),
           Positioned(
-            top: 280.h,
-            left: 13.w,
+            top: ScreenUtil().setHeight(280),
+            left: ScreenUtil().setWidth(13),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.transparent,
                 shadowColor: Colors.transparent,
                 elevation: 0,
-                minimumSize: Size(346.w, 60.h),
+                minimumSize: Size(
+                    ScreenUtil().setWidth(346), ScreenUtil().setHeight(60)),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.r),
+                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(5)),
                 ),
               ),
               onPressed: () {
                 _launchURL(
                     'https://www.google.com'); // Замените на "Оценить приложение"
               },
-              child: Text('', style: TextStyle(fontSize: 16.sp)),
+              child:
+                  Text('', style: TextStyle(fontSize: ScreenUtil().setSp(16))),
             ),
           ),
-          // CustomNavBar поверх основного контента
           Positioned(
             bottom: 0,
             left: 0,

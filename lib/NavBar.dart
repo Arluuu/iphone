@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:iphone/EditReceiptScreen.dart';
 import 'package:iphone/ExpensesScreen.dart';
 import 'package:iphone/Knowledge.dart';
 import 'package:iphone/SavedScreen.dart';
 import 'package:iphone/Sett.dart';
 import 'package:iphone/photki.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'dart:io';
 
 class CustomNavBar extends StatefulWidget {
   final int currentIndex;
@@ -31,6 +35,62 @@ class _CustomNavBarState extends State<CustomNavBar> {
   ];
 
   final ImagePicker _picker = ImagePicker();
+  List<Map<String, dynamic>> _savedReceipts = [];
+  List<Map<String, dynamic>> _filteredReceipts = [];
+  final TextEditingController _searchController = TextEditingController();
+  bool _sortNewFirst = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedReceipts();
+    _searchController.addListener(_filterReceipts);
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_filterReceipts);
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  Future<void> _loadSavedReceipts() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? receiptsJson = prefs.getString('saved_receipts');
+
+    if (receiptsJson != null) {
+      setState(() {
+        _savedReceipts =
+            List<Map<String, dynamic>>.from(jsonDecode(receiptsJson));
+        _filteredReceipts = _savedReceipts;
+        _sortReceipts();
+      });
+    }
+  }
+
+  Future<void> _saveReceipt(Map<String, dynamic> newReceipt) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    _savedReceipts.insert(0, newReceipt);
+
+    await prefs.setString('saved_receipts', jsonEncode(_savedReceipts));
+
+    setState(() {
+      _filterReceipts();
+    });
+  }
+
+  Future<void> _deleteReceipt(int index) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    _savedReceipts.removeAt(index);
+
+    await prefs.setString('saved_receipts', jsonEncode(_savedReceipts));
+
+    setState(() {
+      _filterReceipts();
+    });
+  }
 
   Future<void> _openCamera(BuildContext context) async {
     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
@@ -41,31 +101,73 @@ class _CustomNavBarState extends State<CustomNavBar> {
         MaterialPageRoute(
           builder: (context) => PurchaseDetailsScreen(
             image: image,
-            onSave: (newReceipt) {
-              print('New receipt saved: $newReceipt');
-            },
+            onSave: _saveReceipt,
           ),
         ),
       );
     }
   }
 
+  void _editReceipt(int index) async {
+    final receipt = _savedReceipts[index];
+    final updatedReceipt = await Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditReceiptScreen(
+          receipt: receipt,
+          onSave: (updatedData) {
+            setState(() {
+              _savedReceipts[index] = updatedData;
+              _filterReceipts();
+            });
+          },
+        ),
+      ),
+    );
+
+    if (updatedReceipt != null) {
+      setState(() {
+        _savedReceipts[index] = updatedReceipt;
+        _filterReceipts();
+      });
+    }
+  }
+
+  void _filterReceipts() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      _filteredReceipts = _savedReceipts.where((receipt) {
+        final name = receipt['name'].toLowerCase();
+        return name.contains(query);
+      }).toList();
+      _sortReceipts();
+    });
+  }
+
+  void _sortReceipts() {
+    setState(() {
+      if (_sortNewFirst) {
+        _filteredReceipts.sort((a, b) =>
+            DateTime.parse(b['date']).compareTo(DateTime.parse(a['date'])));
+      } else {
+        _filteredReceipts.sort((a, b) =>
+            DateTime.parse(a['date']).compareTo(DateTime.parse(b['date'])));
+      }
+    });
+  }
+
+  void _toggleSortOrder(String value) {
+    setState(() {
+      _sortNewFirst = value == 'Сначала новые';
+      _sortReceipts();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 105.h,
+    return SizedBox(
+      height: 109.h,
       width: double.infinity,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 10,
-            offset: Offset(0, 3),
-          ),
-        ],
-      ),
-      clipBehavior: Clip.hardEdge,
       child: Stack(
         children: [
           Positioned.fill(
@@ -76,44 +178,49 @@ class _CustomNavBarState extends State<CustomNavBar> {
             ),
           ),
           Positioned(
-            left: 35.w,
+              left: 25.w,
+              bottom: 37.h,
+              child: Opacity(
+                opacity: 0.0,
+                child: _buildNavItem(Icons.home, 0, color: Colors.transparent),
+              )),
+          Positioned(
+              left: 95.w,
+              bottom: 37.h,
+              child: Opacity(
+                opacity: 0.0,
+                child: _buildNavItem(Icons.home, 1, color: Colors.transparent),
+              )),
+          Positioned(
+            right: 95.w,
             bottom: 37.h,
-            child: _buildNavItem(Icons.home, 0, color: Colors.transparent),
+            child: Opacity(
+              opacity: 0.0,
+              child: _buildNavItem(Icons.home, 2, color: Colors.transparent),
+            ),
           ),
           Positioned(
-            left: 100.w,
+            right: 22.w,
             bottom: 37.h,
-            child: _buildNavItem(Icons.search, 1, color: Colors.transparent),
+            child: Opacity(
+              opacity: 0.0,
+              child: _buildNavItem(Icons.home, 3, color: Colors.transparent),
+            ),
           ),
           Positioned(
-            right: 100.w,
-            bottom: 37.h,
-            child:
-                _buildNavItem(Icons.camera_alt, 2, color: Colors.transparent),
-          ),
-          Positioned(
-            right: 35.w,
-            bottom: 37.h,
-            child: _buildNavItem(Icons.settings, 3, color: Colors.transparent),
-          ),
-          Positioned(
-            right: 145.w,
             bottom: 35.h,
+            left: 158.w,
             child: GestureDetector(
               onTap: () => _openCamera(context),
               child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 30.w,
-                  vertical: 15.h,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 25.h),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
-                child: Icon(
-                  Icons.camera_alt,
-                  color: Colors.transparent,
-                  size: 24.sp,
+                child: Text(
+                  '',
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
               ),
             ),
@@ -123,7 +230,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
     );
   }
 
-  Widget _buildNavItem(IconData icon, int index, {Color? color}) {
+  Widget _buildNavItem(IconData icon, int index, {required Color color}) {
     final isSelected = widget.currentIndex == index;
     return GestureDetector(
       onTap: () {
@@ -160,7 +267,7 @@ class _CustomNavBarState extends State<CustomNavBar> {
         children: [
           Icon(
             icon,
-            color: color ?? (isSelected ? Colors.transparent : Colors.grey),
+            color: isSelected ? Colors.transparent : Colors.grey,
             size: 24.sp,
           ),
           if (isSelected)

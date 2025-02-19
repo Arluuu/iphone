@@ -202,54 +202,63 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize:
+          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      minTextAdapt: true,
+    );
+
     return Scaffold(
       body: Stack(
         children: [
           Positioned.fill(
             child: Image.asset(
               'assets/Expenses.png',
-              width: 375.w,
-              height: 812.h,
-              fit: BoxFit.cover,
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenHeight,
+              fit: BoxFit.fill,
             ),
           ),
           Positioned(
-            bottom: 37.h,
-            left: 184.w,
+            bottom: ScreenUtil().setHeight(37),
+            left: ScreenUtil().setWidth(184),
             child: Container(
               width: circleRadius * 2,
               height: circleRadius * 2,
               decoration: BoxDecoration(
                 color: const Color.fromARGB(0, 218, 212, 212),
-                borderRadius: BorderRadius.circular(circleRadius = 40.r),
+                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(40)),
               ),
             ),
           ),
           Positioned(
-            top: 120.h,
+            top: ScreenUtil().setHeight(120),
             left: 0,
             child: Container(
-              width: 381.w,
-              height: 812.h,
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenHeight,
               decoration: BoxDecoration(
                 color: Colors.transparent,
-                borderRadius: BorderRadius.circular(16.r),
+                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(16)),
               ),
               child: _savedReceipts.isNotEmpty
                   ? SingleChildScrollView(
-                      padding: EdgeInsets.all(16.w),
+                      padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
                       child: Column(
                         children: [
-                          SizedBox(height: 0.h),
+                          SizedBox(height: ScreenUtil().setHeight(0)),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 16.w, vertical: 8.h),
+                                    horizontal: ScreenUtil().setWidth(16),
+                                    vertical: ScreenUtil().setHeight(8)),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16.r),
+                                  borderRadius: BorderRadius.circular(
+                                      ScreenUtil().setWidth(16)),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.grey.withOpacity(0.3),
@@ -277,15 +286,18 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                   underline: Container(),
                                   icon: Icon(Icons.arrow_drop_down),
                                   style: TextStyle(
-                                      fontSize: 16.sp, color: Colors.orange),
+                                      fontSize: ScreenUtil().setSp(16),
+                                      color: Colors.orange),
                                 ),
                               ),
                               Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 16.w, vertical: 8.h),
+                                    horizontal: ScreenUtil().setWidth(16),
+                                    vertical: ScreenUtil().setHeight(8)),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16.r),
+                                  borderRadius: BorderRadius.circular(
+                                      ScreenUtil().setWidth(16)),
                                   boxShadow: [
                                     BoxShadow(
                                       color: Colors.grey.withOpacity(0.3),
@@ -299,18 +311,20 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                   _selectedDateRange != null
                                       ? 'С ${DateFormat('dd.MM.yyyy').format(_selectedDateRange!.start)} по ${DateFormat('dd.MM.yyyy').format(_selectedDateRange!.end)}'
                                       : 'Выберите период',
-                                  style: TextStyle(fontSize: 15.sp),
+                                  style: TextStyle(
+                                      fontSize: ScreenUtil().setSp(15)),
                                 ),
                               ),
                             ],
                           ),
-                          SizedBox(height: 20.h),
+                          SizedBox(height: ScreenUtil().setHeight(20)),
                           Container(
-                            height: 300.h,
-                            padding: EdgeInsets.all(16.w),
+                            height: ScreenUtil().setHeight(300),
+                            padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(16.r),
+                              borderRadius: BorderRadius.circular(
+                                  ScreenUtil().setWidth(16)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.5),
@@ -323,7 +337,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                             child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
                               child: SizedBox(
-                                width: 1000.w,
+                                width: ScreenUtil().setWidth(1000),
                                 child: LineChart(
                                   LineChartData(
                                     gridData: FlGridData(
@@ -340,7 +354,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                       bottomTitles: AxisTitles(
                                         sideTitles: SideTitles(
                                           showTitles: true,
-                                          reservedSize: 32.h,
+                                          reservedSize:
+                                              ScreenUtil().setHeight(32),
                                           interval: 1,
                                           getTitlesWidget: (value, meta) {
                                             final index = value.toInt();
@@ -348,7 +363,9 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                               return Container();
                                             return Text(
                                               _getMonths()[index - 1],
-                                              style: TextStyle(fontSize: 12.sp),
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      ScreenUtil().setSp(12)),
                                             );
                                           },
                                         ),
@@ -360,10 +377,13 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                           getTitlesWidget: (value, meta) {
                                             return Text(
                                               value.toStringAsFixed(0),
-                                              style: TextStyle(fontSize: 12.sp),
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      ScreenUtil().setSp(12)),
                                             );
                                           },
-                                          reservedSize: 60.h,
+                                          reservedSize:
+                                              ScreenUtil().setHeight(60),
                                         ),
                                       ),
                                       rightTitles: AxisTitles(
@@ -398,12 +418,13 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20.h),
+                          SizedBox(height: ScreenUtil().setHeight(20)),
                           Container(
-                            padding: EdgeInsets.all(16.w),
+                            padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(16.r),
+                              borderRadius: BorderRadius.circular(
+                                  ScreenUtil().setWidth(16)),
                               boxShadow: [
                                 BoxShadow(
                                   color: Colors.grey.withOpacity(0.3),
@@ -421,10 +442,11 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                   children: [
                                     Text("Количество покупок",
                                         style: TextStyle(
-                                            fontSize: 16.sp,
+                                            fontSize: ScreenUtil().setSp(16),
                                             fontWeight: FontWeight.bold)),
                                     Text("${_getTotalPurchases()} шт.",
-                                        style: TextStyle(fontSize: 18.sp)),
+                                        style: TextStyle(
+                                            fontSize: ScreenUtil().setSp(18))),
                                   ],
                                 ),
                                 Column(
@@ -432,19 +454,19 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                   children: [
                                     Text("Потрачено",
                                         style: TextStyle(
-                                            fontSize: 16.sp,
+                                            fontSize: ScreenUtil().setSp(16),
                                             fontWeight: FontWeight.bold)),
                                     Text(
                                         "${_getTotalSpent().toStringAsFixed(2)} ₽",
                                         style: TextStyle(
-                                            fontSize: 18.sp,
+                                            fontSize: ScreenUtil().setSp(18),
                                             color: Colors.red)),
                                   ],
                                 ),
                               ],
                             ),
                           ),
-                          SizedBox(height: 16.h),
+                          SizedBox(height: ScreenUtil().setHeight(16)),
                           Column(
                             children: _getCategorySums().entries.map((entry) {
                               final totalSpent = _getTotalSpent();
@@ -458,10 +480,12 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 8.0),
                                 child: Container(
-                                  padding: EdgeInsets.all(16.w),
+                                  padding:
+                                      EdgeInsets.all(ScreenUtil().setWidth(16)),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(16.r),
+                                    borderRadius: BorderRadius.circular(
+                                        ScreenUtil().setWidth(16)),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.grey.withOpacity(0.3),
@@ -481,11 +505,13 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                         children: [
                                           Text(entry.key,
                                               style: TextStyle(
-                                                  fontSize: 16.sp,
+                                                  fontSize:
+                                                      ScreenUtil().setSp(16),
                                                   fontWeight: FontWeight.bold)),
                                           Text("${purchaseCount} покупок",
                                               style: TextStyle(
-                                                  fontSize: 14.sp,
+                                                  fontSize:
+                                                      ScreenUtil().setSp(14),
                                                   color: Colors.grey)),
                                         ],
                                       ),
@@ -496,28 +522,33 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                                           Text(
                                               "${entry.value.toStringAsFixed(2)} ₽",
                                               style: TextStyle(
-                                                  fontSize: 16.sp,
+                                                  fontSize:
+                                                      ScreenUtil().setSp(16),
                                                   color: Colors.red)),
                                           Text("$percentage%",
                                               style: TextStyle(
-                                                  fontSize: 14.sp,
+                                                  fontSize:
+                                                      ScreenUtil().setSp(14),
                                                   color: Colors.grey)),
                                         ],
                                       ),
-                                      SizedBox(width: 16.w),
+                                      SizedBox(
+                                          width: ScreenUtil().setWidth(16)),
                                       Stack(
                                         alignment: Alignment.center,
                                         children: [
                                           CircularProgressIndicator(
                                             value: percentage / 100,
-                                            strokeWidth: 8.w,
+                                            strokeWidth:
+                                                ScreenUtil().setWidth(8),
                                             backgroundColor: Colors.grey[300],
                                             color: Colors.blue,
                                           ),
                                           Text(
                                             "$percentage%",
                                             style: TextStyle(
-                                                fontSize: 14.sp,
+                                                fontSize:
+                                                    ScreenUtil().setSp(14),
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ],
@@ -533,8 +564,9 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                     )
                   : Center(
                       child: Text('Нет данных для отображения',
-                          style:
-                              TextStyle(fontSize: 18.sp, color: Colors.grey)),
+                          style: TextStyle(
+                              fontSize: ScreenUtil().setSp(18),
+                              color: Colors.grey)),
                     ),
             ),
           ),

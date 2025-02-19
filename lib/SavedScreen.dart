@@ -2,11 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:iphone/EditReceiptScreen.dart';
 import 'package:iphone/NavBar.dart';
-import 'package:iphone/photki.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'photki.dart';
 
 class SavedScreen extends StatefulWidget {
   const SavedScreen({super.key});
@@ -148,37 +149,49 @@ class _SavedScreenState extends State<SavedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize: Size(375, 812),
+      minTextAdapt: true,
+    );
+
     return Scaffold(
       body: Stack(
         children: [
-          Image.asset(
-            _savedReceipts.isNotEmpty
-                ? 'assets/saved2.png'
-                : 'assets/saved.png',
-            width: 1.sw,
-            height: 1.sh,
-            fit: BoxFit.fill,
+          Align(
+            alignment: Alignment.topCenter,
+            child: Image.asset(
+              _savedReceipts.isNotEmpty
+                  ? 'assets/saved2.png'
+                  : 'assets/saved.png',
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenHeight,
+              fit: BoxFit.fill,
+            ),
           ),
           Positioned(
-            top: MediaQuery.of(context).padding.top + 85.h,
-            left: 50.w,
-            right: 80.w,
+            top: ScreenUtil().setHeight(127),
+            left: ScreenUtil().setWidth(50),
+            right: ScreenUtil().setWidth(80),
             child: Container(
-              height: 45.h,
+              height: ScreenUtil().setHeight(45),
               child: TextField(
                 controller: _searchController,
                 decoration: InputDecoration(
                     hintText: 'Поиск по названию',
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius:
+                          BorderRadius.circular(ScreenUtil().setWidth(10)),
                       borderSide: BorderSide.none,
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius:
+                          BorderRadius.circular(ScreenUtil().setWidth(10)),
                       borderSide: BorderSide.none,
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius:
+                          BorderRadius.circular(ScreenUtil().setWidth(10)),
                       borderSide: BorderSide.none,
                     ),
                     filled: true,
@@ -187,14 +200,14 @@ class _SavedScreenState extends State<SavedScreen> {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).padding.top + 78.h,
-            right: 20.w,
+            top: ScreenUtil().setHeight(123),
+            right: ScreenUtil().setWidth(20),
             child: Container(
-              width: 45.w,
-              height: 45.h,
+              width: ScreenUtil().setWidth(45),
+              height: ScreenUtil().setHeight(45),
               decoration: BoxDecoration(
                 color: Colors.orange,
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8)),
               ),
               child: PopupMenuButton<String>(
                 onSelected: _toggleSortOrder,
@@ -214,17 +227,18 @@ class _SavedScreenState extends State<SavedScreen> {
             ),
           ),
           Positioned(
-            top: 170.h,
-            left: 20.w,
-            right: 20.w,
-            bottom: 100.h,
+            top: ScreenUtil().setHeight(170),
+            left: ScreenUtil().setWidth(20),
+            right: ScreenUtil().setWidth(20),
+            bottom: ScreenUtil().setHeight(100),
             child: _filteredReceipts.isNotEmpty
                 ? ListView.builder(
                     itemCount: _filteredReceipts.length,
                     itemBuilder: (context, index) {
                       final receipt = _filteredReceipts[index];
                       return Card(
-                        margin: EdgeInsets.symmetric(vertical: 10.h),
+                        margin: EdgeInsets.symmetric(
+                            vertical: ScreenUtil().setHeight(10)),
                         child: ListTile(
                           leading: receipt['imagePath'].isNotEmpty
                               ? Image.file(File(receipt['imagePath']))
@@ -254,10 +268,38 @@ class _SavedScreenState extends State<SavedScreen> {
                   )
                 : Center(
                     child: Text(
-                      '',
-                      style: TextStyle(fontSize: 18.sp, color: Colors.grey),
+                      'Нет чеков',
+                      style: TextStyle(
+                          fontSize: ScreenUtil().setSp(18), color: Colors.grey),
                     ),
                   ),
+          ),
+          Positioned(
+            bottom: 22.h,
+            right: 155.w,
+            child: SvgPicture.asset(
+              'assets/3.svg',
+              width: 70.w,
+              height: 70.h,
+            ),
+          ),
+          Positioned(
+            bottom: 35.h,
+            left: 158.w,
+            child: GestureDetector(
+              onTap: () => _openCamera(context),
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: Text(
+                  '',
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                ),
+              ),
+            ),
           ),
           Positioned(
             bottom: 0,
@@ -271,7 +313,7 @@ class _SavedScreenState extends State<SavedScreen> {
                 });
               },
             ),
-          ),
+          )
         ],
       ),
     );

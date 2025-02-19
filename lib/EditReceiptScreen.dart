@@ -82,43 +82,52 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize:
+          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      minTextAdapt: true,
+    );
+
     return Scaffold(
       body: Stack(
         children: [
           Positioned.fill(
             child: Image.asset(
               'assets/redaktor.png',
-              width: 375.w,
-              height: 812.h,
-              fit: BoxFit.cover,
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenHeight,
+              fit: BoxFit.fill,
             ),
           ),
           SingleChildScrollView(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 150.h),
+                SizedBox(height: ScreenUtil().setHeight(150)),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(16.r),
+                    borderRadius:
+                        BorderRadius.circular(ScreenUtil().setWidth(16)),
                     border: Border.all(color: Colors.grey),
                   ),
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
                   width: double.infinity,
                   child: Column(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(16.r),
+                        borderRadius:
+                            BorderRadius.circular(ScreenUtil().setWidth(16)),
                         child: Image.file(
                           File(_currentImage.path),
-                          width: 200.w,
-                          height: 200.h,
+                          width: ScreenUtil().setWidth(200),
+                          height: ScreenUtil().setHeight(200),
                           fit: BoxFit.cover,
                         ),
                       ),
-                      SizedBox(height: 16.h),
+                      SizedBox(height: ScreenUtil().setHeight(16)),
                       TextButton(
                         onPressed: _pickImage,
                         child: Text(
@@ -129,7 +138,7 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 16.h),
+                SizedBox(height: ScreenUtil().setHeight(16)),
                 _buildInputField(
                     'Название покупки', 'Название', _nameController),
                 _buildDatePicker(
@@ -139,7 +148,7 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
                 _buildInputField(
                     'Категория', '#Категория покупки', _categoryController),
                 _buildInputField('Магазин', 'Место покупки', _storeController),
-                SizedBox(height: 16.h),
+                SizedBox(height: ScreenUtil().setHeight(16)),
                 Row(
                   children: [
                     Checkbox(
@@ -158,20 +167,22 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
                       'Дата окончания гарантии', _warrantyDateController),
                 _buildInputField('Описание', 'Краткое описание покупки',
                     _descriptionController, null),
-                SizedBox(height: 16.h),
+                SizedBox(height: ScreenUtil().setHeight(16)),
                 Center(
                   child: ElevatedButton(
                     onPressed: _isFormValid ? _saveEditedReceipt : null,
                     style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 40.w, vertical: 20.h),
-                      fixedSize: Size(343.w, 65.h),
+                          horizontal: ScreenUtil().setWidth(40),
+                          vertical: ScreenUtil().setHeight(20)),
+                      fixedSize: Size(ScreenUtil().setWidth(343),
+                          ScreenUtil().setHeight(65)),
                       backgroundColor:
                           _isFormValid ? Colors.orange : Colors.grey,
                     ),
                     child: Text(
                       'Сохранить',
-                      style: TextStyle(fontSize: 20.sp),
+                      style: TextStyle(fontSize: ScreenUtil().setSp(20)),
                     ),
                   ),
                 ),
@@ -179,22 +190,22 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
             ),
           ),
           Positioned(
-            top: 0.h,
-            right: 13.w,
+            top: ScreenUtil().setHeight(-20),
+            right: ScreenUtil().setWidth(0),
             child: SvgPicture.asset(
               'assets/statbar.svg',
-              width: 300.w,
-              height: 100.h,
+              width: ScreenUtil().setWidth(200),
+              height: ScreenUtil().setHeight(130),
             ),
           ),
           Positioned(
-            top: 57.h,
-            left: 4.w,
+            top: ScreenUtil().setHeight(57),
+            left: ScreenUtil().setWidth(4),
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
               color: Colors.transparent,
-              iconSize: 30.w,
+              iconSize: ScreenUtil().setWidth(30),
             ),
           ),
         ],
@@ -209,7 +220,7 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label),
-        SizedBox(height: 8.h),
+        SizedBox(height: ScreenUtil().setHeight(8)),
         TextField(
           controller: controller,
           keyboardType: keyboardType,
@@ -218,17 +229,19 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
             hintText: hint,
             border: InputBorder.none,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 2.w),
+              borderSide: BorderSide(
+                  color: Colors.grey, width: ScreenUtil().setWidth(2)),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.orange, width: 2.w),
+              borderSide: BorderSide(
+                  color: Colors.orange, width: ScreenUtil().setWidth(2)),
             ),
           ),
           onChanged: (value) {
             setState(() {});
           },
         ),
-        SizedBox(height: 16.h),
+        SizedBox(height: ScreenUtil().setHeight(16)),
       ],
     );
   }
@@ -239,17 +252,19 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label),
-        SizedBox(height: 8.h),
+        SizedBox(height: ScreenUtil().setHeight(8)),
         TextField(
           controller: controller,
           decoration: InputDecoration(
             hintText: hint,
             border: InputBorder.none,
             enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 2.w),
+              borderSide: BorderSide(
+                  color: Colors.grey, width: ScreenUtil().setWidth(2)),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.orange, width: 2.w),
+              borderSide: BorderSide(
+                  color: Colors.orange, width: ScreenUtil().setWidth(2)),
             ),
           ),
           readOnly: true,
@@ -270,7 +285,7 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
             setState(() {});
           },
         ),
-        SizedBox(height: 16.h),
+        SizedBox(height: ScreenUtil().setHeight(16)),
       ],
     );
   }

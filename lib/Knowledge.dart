@@ -43,23 +43,30 @@ class _KnowledgeScreenState extends State<KnowledgeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize:
+          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      minTextAdapt: true,
+    );
+
     return Scaffold(
       body: Stack(
         children: [
           Image.asset(
             'assets/knowledge.png',
-            width: 375.w,
-            height: 812.h,
-            fit: BoxFit.cover,
+            width: ScreenUtil().screenWidth,
+            height: ScreenUtil().screenHeight,
+            fit: BoxFit.fill,
           ),
           Positioned(
-            top: 145.h,
-            left: 13.w,
+            top: ScreenUtil().setHeight(145),
+            left: ScreenUtil().setWidth(13),
             child: GestureDetector(
               onTap: () => _navigateToPage1(context),
               child: Container(
-                width: 202.w,
-                height: 350.h,
+                width: ScreenUtil().setWidth(202),
+                height: ScreenUtil().setHeight(350),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),
@@ -67,13 +74,13 @@ class _KnowledgeScreenState extends State<KnowledgeScreen> {
             ),
           ),
           Positioned(
-            top: 145.h,
-            right: 13.w,
+            top: ScreenUtil().setHeight(145),
+            right: ScreenUtil().setWidth(13),
             child: GestureDetector(
               onTap: () => _navigateToPage2(context),
               child: Container(
-                width: 202.w,
-                height: 350.h,
+                width: ScreenUtil().setWidth(202),
+                height: ScreenUtil().setHeight(350),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),
@@ -81,13 +88,13 @@ class _KnowledgeScreenState extends State<KnowledgeScreen> {
             ),
           ),
           Positioned(
-            bottom: 130.h,
-            left: 13.w,
+            bottom: ScreenUtil().setHeight(130),
+            left: ScreenUtil().setWidth(13),
             child: GestureDetector(
               onTap: () => _navigateToPage3(context),
               child: Container(
-                width: 202.w,
-                height: 350.h,
+                width: ScreenUtil().setWidth(202),
+                height: ScreenUtil().setHeight(350),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),
@@ -95,13 +102,13 @@ class _KnowledgeScreenState extends State<KnowledgeScreen> {
             ),
           ),
           Positioned(
-            bottom: 130.h,
-            right: 13.w,
+            bottom: ScreenUtil().setHeight(130),
+            right: ScreenUtil().setWidth(13),
             child: GestureDetector(
               onTap: () => _navigateToPage4(context),
               child: Container(
-                width: 202.w,
-                height: 350.h,
+                width: ScreenUtil().setWidth(202),
+                height: ScreenUtil().setHeight(350),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
                 ),

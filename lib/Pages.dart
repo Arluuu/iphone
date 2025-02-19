@@ -53,30 +53,37 @@ class Page1ScreenState extends State<Page1Screen> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize:
+          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      minTextAdapt: true,
+    );
+
     return Scaffold(
       body: Stack(
         children: [
           Center(
             child: Image.asset(
               'assets/fingram.png',
-              width: 375.w,
-              height: 812.h,
-              fit: BoxFit.cover,
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenHeight,
+              fit: BoxFit.fill,
             ),
           ),
           Positioned(
-            top: 74.h,
-            left: 10.w,
+            top: ScreenUtil().setHeight(74),
+            left: ScreenUtil().setWidth(10),
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
               color: Colors.transparent,
-              iconSize: 30.w,
+              iconSize: ScreenUtil().setWidth(30),
             ),
           ),
           Column(
             children: [
-              SizedBox(height: 100.h),
+              SizedBox(height: ScreenUtil().setHeight(100)),
               Expanded(
                 child: DraggableScrollableSheet(
                   expand: true,
@@ -87,35 +94,39 @@ class Page1ScreenState extends State<Page1Screen> {
                       controller: scrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
-                      padding: EdgeInsets.all(16.w),
+                      padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
                       children: [
                         ...List.generate(_containerTitles.length, (index) {
                           return Card(
                             elevation: 2,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.r),
+                              borderRadius: BorderRadius.circular(
+                                  ScreenUtil().setWidth(8)),
                             ),
-                            margin: EdgeInsets.symmetric(vertical: 8.h),
+                            margin: EdgeInsets.symmetric(
+                                vertical: ScreenUtil().setHeight(8)),
                             child: ExpansionTile(
                               title: Text(
                                 _containerTitles[index],
                                 style: TextStyle(
-                                  fontSize: 16.sp,
+                                  fontSize: ScreenUtil().setSp(16),
                                   color: _containerColors[index],
                                 ),
                               ),
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(16.w),
+                                  padding:
+                                      EdgeInsets.all(ScreenUtil().setWidth(16)),
                                   child: IntrinsicHeight(
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                          width: 4.w,
+                                          width: ScreenUtil().setWidth(4),
                                           color: _containerColors[index],
-                                          margin: EdgeInsets.only(right: 8.w),
+                                          margin: EdgeInsets.only(
+                                              right: ScreenUtil().setWidth(8)),
                                         ),
                                         Expanded(
                                           child: Text.rich(
@@ -130,7 +141,8 @@ class Page1ScreenState extends State<Page1Screen> {
                                                           ' ',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 14.sp,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(14),
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -145,7 +157,8 @@ class Page1ScreenState extends State<Page1Screen> {
                                                           .join(' '),
                                                   style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14.sp,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(14),
                                                   ),
                                                 ),
                                               ],
@@ -165,24 +178,27 @@ class Page1ScreenState extends State<Page1Screen> {
                           return Card(
                             elevation: 2,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.r),
+                              borderRadius: BorderRadius.circular(
+                                  ScreenUtil().setWidth(8)),
                             ),
-                            margin: EdgeInsets.symmetric(vertical: 8.h),
+                            margin: EdgeInsets.symmetric(
+                                vertical: ScreenUtil().setHeight(8)),
                             child: ExpansionTile(
                               title: Text(
                                 _bottomContainerTitles[index],
                                 style: TextStyle(
-                                  fontSize: 14.sp,
+                                  fontSize: ScreenUtil().setSp(14),
                                   color: Colors.black,
                                 ),
                               ),
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(16.w),
+                                  padding:
+                                      EdgeInsets.all(ScreenUtil().setWidth(16)),
                                   child: Text(
                                     _bottomContainerTexts[index],
                                     style: TextStyle(
-                                      fontSize: 14.sp,
+                                      fontSize: ScreenUtil().setSp(14),
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -209,6 +225,13 @@ class Page2Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize:
+          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      minTextAdapt: true,
+    );
+
     List<String> _containerTitles = [
       'Права потребителя при покупке товара',
       'Защита от недобросовестных продавцов',
@@ -249,24 +272,24 @@ class Page2Screen extends StatelessWidget {
           Center(
             child: Image.asset(
               'assets/zashita.png',
-              width: 375.w,
-              height: 812.h,
-              fit: BoxFit.cover,
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenHeight,
+              fit: BoxFit.fill,
             ),
           ),
           Positioned(
-            top: 74.h,
-            left: 10.w,
+            top: ScreenUtil().setHeight(74),
+            left: ScreenUtil().setWidth(10),
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
               color: Colors.transparent,
-              iconSize: 30.w,
+              iconSize: ScreenUtil().setWidth(30),
             ),
           ),
           Column(
             children: [
-              SizedBox(height: 100.h),
+              SizedBox(height: ScreenUtil().setHeight(100)),
               Expanded(
                 child: DraggableScrollableSheet(
                   expand: true,
@@ -277,34 +300,38 @@ class Page2Screen extends StatelessWidget {
                       controller: scrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
-                      padding: EdgeInsets.all(16.w),
+                      padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
                       children: List.generate(_containerTitles.length, (index) {
                         return Card(
                           elevation: 2,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius:
+                                BorderRadius.circular(ScreenUtil().setWidth(8)),
                           ),
-                          margin: EdgeInsets.symmetric(vertical: 8.h),
+                          margin: EdgeInsets.symmetric(
+                              vertical: ScreenUtil().setHeight(8)),
                           child: ExpansionTile(
                             title: Text(
                               _containerTitles[index],
                               style: TextStyle(
-                                fontSize: 16.sp,
+                                fontSize: ScreenUtil().setSp(16),
                                 color: _containerColors[index],
                               ),
                             ),
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(16.w),
+                                padding:
+                                    EdgeInsets.all(ScreenUtil().setWidth(16)),
                                 child: IntrinsicHeight(
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        width: 4.w,
+                                        width: ScreenUtil().setWidth(4),
                                         color: _containerColors[index],
-                                        margin: EdgeInsets.only(right: 8.w),
+                                        margin: EdgeInsets.only(
+                                            right: ScreenUtil().setWidth(8)),
                                       ),
                                       Expanded(
                                         child: Text.rich(
@@ -315,7 +342,8 @@ class Page2Screen extends StatelessWidget {
                                                   text: 'Право на возврат ',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 14.sp,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(14),
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -325,7 +353,8 @@ class Page2Screen extends StatelessWidget {
                                                           ''),
                                                   style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14.sp,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(14),
                                                   ),
                                                 ),
                                               ] else if (index == 1) ...[
@@ -334,7 +363,8 @@ class Page2Screen extends StatelessWidget {
                                                       'Как бороться с мошенничеством ',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 14.sp,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(14),
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -344,7 +374,8 @@ class Page2Screen extends StatelessWidget {
                                                           ''),
                                                   style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14.sp,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(14),
                                                   ),
                                                 ),
                                               ] else if (index == 2) ...[
@@ -353,7 +384,8 @@ class Page2Screen extends StatelessWidget {
                                                       'Особенности покупки в рассрочку ',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 14.sp,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(14),
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -363,7 +395,8 @@ class Page2Screen extends StatelessWidget {
                                                           ''),
                                                   style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14.sp,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(14),
                                                   ),
                                                 ),
                                               ] else ...[
@@ -374,7 +407,8 @@ class Page2Screen extends StatelessWidget {
                                                       ' ',
                                                   style: TextStyle(
                                                     color: Colors.black,
-                                                    fontSize: 14.sp,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(14),
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -384,7 +418,8 @@ class Page2Screen extends StatelessWidget {
                                                       .join(' '),
                                                   style: TextStyle(
                                                     color: Colors.grey,
-                                                    fontSize: 14.sp,
+                                                    fontSize:
+                                                        ScreenUtil().setSp(14),
                                                   ),
                                                 ),
                                               ],
@@ -417,11 +452,16 @@ class Page3Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize:
+          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      minTextAdapt: true,
+    );
+
     String _containerTitle =
         'Использование “InvoSnap” для финансового планирования';
-
     Color _containerColor = Colors.purple;
-
     String _containerText =
         '''Система категорий чеков в приложении поможет лучше отслеживать, на что уходят деньги, что особенно полезно для тех, кто хочет управлять своими расходами. Пользователь может анализировать данные, создавая месячные или квартальные отчеты.''';
 
@@ -431,24 +471,24 @@ class Page3Screen extends StatelessWidget {
           Center(
             child: Image.asset(
               'assets/sovet.png',
-              width: 375.w,
-              height: 812.h,
-              fit: BoxFit.cover,
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenHeight,
+              fit: BoxFit.fill,
             ),
           ),
           Positioned(
-            top: 74.h,
-            left: 10.w,
+            top: ScreenUtil().setHeight(74),
+            left: ScreenUtil().setWidth(10),
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
               color: Colors.transparent,
-              iconSize: 30.w,
+              iconSize: ScreenUtil().setWidth(30),
             ),
           ),
           Column(
             children: [
-              SizedBox(height: 100.h),
+              SizedBox(height: ScreenUtil().setHeight(100)),
               Expanded(
                 child: DraggableScrollableSheet(
                   expand: true,
@@ -459,41 +499,45 @@ class Page3Screen extends StatelessWidget {
                       controller: scrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
-                      padding: EdgeInsets.all(16.w),
+                      padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
                       children: [
                         Card(
                           elevation: 2,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius:
+                                BorderRadius.circular(ScreenUtil().setWidth(8)),
                           ),
-                          margin: EdgeInsets.symmetric(vertical: 8.h),
+                          margin: EdgeInsets.symmetric(
+                              vertical: ScreenUtil().setHeight(8)),
                           child: ExpansionTile(
                             title: Text(
                               _containerTitle,
                               style: TextStyle(
-                                fontSize: 16.sp,
+                                fontSize: ScreenUtil().setSp(16),
                                 color: _containerColor,
                               ),
                             ),
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(16.w),
+                                padding:
+                                    EdgeInsets.all(ScreenUtil().setWidth(16)),
                                 child: IntrinsicHeight(
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        width: 4.w,
+                                        width: ScreenUtil().setWidth(4),
                                         color: _containerColor,
-                                        margin: EdgeInsets.only(right: 8.w),
+                                        margin: EdgeInsets.only(
+                                            right: ScreenUtil().setWidth(8)),
                                       ),
                                       Expanded(
                                         child: Text(
                                           _containerText,
                                           style: TextStyle(
                                             color: Colors.grey,
-                                            fontSize: 14.sp,
+                                            fontSize: ScreenUtil().setSp(14),
                                           ),
                                         ),
                                       ),
@@ -522,6 +566,13 @@ class Page4Screen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(
+      context,
+      designSize:
+          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      minTextAdapt: true,
+    );
+
     List<String> _containerTitles = [
       'Как правильно хранить финансовые данные',
       'Как избежать мошенничества',
@@ -545,24 +596,24 @@ class Page4Screen extends StatelessWidget {
           Center(
             child: Image.asset(
               'assets/zashitadannih.png',
-              width: 375.w,
-              height: 812.h,
-              fit: BoxFit.cover,
+              width: ScreenUtil().screenWidth,
+              height: ScreenUtil().screenHeight,
+              fit: BoxFit.fill,
             ),
           ),
           Positioned(
-            top: 74.h,
-            left: 10.w,
+            top: ScreenUtil().setHeight(74),
+            left: ScreenUtil().setWidth(10),
             child: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () => Navigator.of(context).pop(),
               color: Colors.transparent,
-              iconSize: 30.w,
+              iconSize: ScreenUtil().setWidth(30),
             ),
           ),
           Column(
             children: [
-              SizedBox(height: 100.h),
+              SizedBox(height: ScreenUtil().setHeight(100)),
               Expanded(
                 child: DraggableScrollableSheet(
                   expand: true,
@@ -573,41 +624,45 @@ class Page4Screen extends StatelessWidget {
                       controller: scrollController,
                       shrinkWrap: true,
                       physics: AlwaysScrollableScrollPhysics(),
-                      padding: EdgeInsets.all(16.w),
+                      padding: EdgeInsets.all(ScreenUtil().setWidth(16)),
                       children: List.generate(_containerTitles.length, (index) {
                         return Card(
                           elevation: 2,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.r),
+                            borderRadius:
+                                BorderRadius.circular(ScreenUtil().setWidth(8)),
                           ),
-                          margin: EdgeInsets.symmetric(vertical: 8.h),
+                          margin: EdgeInsets.symmetric(
+                              vertical: ScreenUtil().setHeight(8)),
                           child: ExpansionTile(
                             title: Text(
                               _containerTitles[index],
                               style: TextStyle(
-                                fontSize: 16.sp,
+                                fontSize: ScreenUtil().setSp(16),
                                 color: _containerColors[index],
                               ),
                             ),
                             children: [
                               Padding(
-                                padding: EdgeInsets.all(16.w),
+                                padding:
+                                    EdgeInsets.all(ScreenUtil().setWidth(16)),
                                 child: IntrinsicHeight(
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        width: 4.w,
+                                        width: ScreenUtil().setWidth(4),
                                         color: _containerColors[index],
-                                        margin: EdgeInsets.only(right: 8.w),
+                                        margin: EdgeInsets.only(
+                                            right: ScreenUtil().setWidth(8)),
                                       ),
                                       Expanded(
                                         child: Text(
                                           _containerTexts[index],
                                           style: TextStyle(
                                             color: Colors.grey,
-                                            fontSize: 14.sp,
+                                            fontSize: ScreenUtil().setSp(14),
                                           ),
                                         ),
                                       ),
