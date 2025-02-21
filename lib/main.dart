@@ -102,9 +102,9 @@ class ImageSliderScreenState extends State<ImageSliderScreen> {
   int _currentPage = 0;
 
   final List<String> _images = [
-    'assets/onboarding_41.png',
-    'assets/onboarding_42.png',
-    'assets/onboarding_43.png',
+    'assets/onboarding 41.png',
+    'assets/onboarding 42.png',
+    'assets/onboarding 43.png',
   ];
 
   void _skipOnboarding() {

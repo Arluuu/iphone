@@ -115,19 +115,6 @@ class _KnowledgeScreenState extends State<KnowledgeScreen> {
               ),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: CustomNavBar(
-              currentIndex: _currentIndex,
-              onTap: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-            ),
-          ),
         ],
       ),
     );

@@ -155,166 +155,158 @@ class _SavedScreenState extends State<SavedScreen> {
       minTextAdapt: true,
     );
 
-    return Scaffold(
-      body: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Image.asset(
-              _savedReceipts.isNotEmpty
-                  ? 'assets/saved2.png'
-                  : 'assets/saved.png',
-              width: ScreenUtil().screenWidth,
-              height: ScreenUtil().screenHeight,
-              fit: BoxFit.fill,
-            ),
-          ),
-          Positioned(
-            top: ScreenUtil().setHeight(127),
-            left: ScreenUtil().setWidth(50),
-            right: ScreenUtil().setWidth(80),
-            child: Container(
-              height: ScreenUtil().setHeight(45),
-              child: TextField(
-                controller: _searchController,
-                decoration: InputDecoration(
-                    hintText: 'Поиск по названию',
-                    border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(ScreenUtil().setWidth(10)),
-                      borderSide: BorderSide.none,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(ScreenUtil().setWidth(10)),
-                      borderSide: BorderSide.none,
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(ScreenUtil().setWidth(10)),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.transparent),
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Align(
+              alignment: Alignment.topCenter,
+              child: Image.asset(
+                _savedReceipts.isNotEmpty
+                    ? 'assets/saved2.png'
+                    : 'assets/saved.png',
+                width: ScreenUtil().screenWidth,
+                height: ScreenUtil().screenHeight,
+                fit: BoxFit.fill,
               ),
             ),
-          ),
-          Positioned(
-            top: ScreenUtil().setHeight(123),
-            right: ScreenUtil().setWidth(20),
-            child: Container(
-              width: ScreenUtil().setWidth(45),
-              height: ScreenUtil().setHeight(45),
-              decoration: BoxDecoration(
-                color: Colors.orange,
-                borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8)),
-              ),
-              child: PopupMenuButton<String>(
-                onSelected: _toggleSortOrder,
-                itemBuilder: (BuildContext context) {
-                  return ['Сначала новые', 'Сначала старые']
-                      .map((String choice) {
-                    return PopupMenuItem<String>(
-                      value: choice,
-                      child: Text(choice),
-                    );
-                  }).toList();
-                },
-                child: Center(
-                  child: Icon(Icons.sort, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            top: ScreenUtil().setHeight(170),
-            left: ScreenUtil().setWidth(20),
-            right: ScreenUtil().setWidth(20),
-            bottom: ScreenUtil().setHeight(100),
-            child: _filteredReceipts.isNotEmpty
-                ? ListView.builder(
-                    itemCount: _filteredReceipts.length,
-                    itemBuilder: (context, index) {
-                      final receipt = _filteredReceipts[index];
-                      return Card(
-                        margin: EdgeInsets.symmetric(
-                            vertical: ScreenUtil().setHeight(10)),
-                        child: ListTile(
-                          leading: receipt['imagePath'].isNotEmpty
-                              ? Image.file(File(receipt['imagePath']))
-                              : Icon(Icons.image),
-                          title: Text(receipt['name']),
-                          subtitle: Text(
-                              '${receipt['date']} - ${receipt['amount']} руб. - ${receipt['category']}'),
-                          trailing: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.edit),
-                                onPressed: () => _editReceipt(index),
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.delete),
-                                onPressed: () {
-                                  _deleteReceipt(index);
-                                },
-                              ),
-                            ],
-                          ),
-                          onTap: () {},
-                        ),
-                      );
-                    },
-                  )
-                : Center(
-                    child: Text(
-                      'Нет чеков',
-                      style: TextStyle(
-                          fontSize: ScreenUtil().setSp(18), color: Colors.grey),
-                    ),
-                  ),
-          ),
-          Positioned(
-            bottom: 22.h,
-            right: 155.w,
-            child: SvgPicture.asset(
-              'assets/3.svg',
-              width: 70.w,
-              height: 70.h,
-            ),
-          ),
-          Positioned(
-            bottom: 35.h,
-            left: 158.w,
-            child: GestureDetector(
-              onTap: () => _openCamera(context),
+            Positioned(
+              top: ScreenUtil().setHeight(127),
+              left: ScreenUtil().setWidth(50),
+              right: ScreenUtil().setWidth(80),
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Text(
-                  '',
-                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                height: ScreenUtil().setHeight(45),
+                child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                      hintText: 'Поиск по названию',
+                      border: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(ScreenUtil().setWidth(10)),
+                        borderSide: BorderSide.none,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(ScreenUtil().setWidth(10)),
+                        borderSide: BorderSide.none,
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius:
+                            BorderRadius.circular(ScreenUtil().setWidth(10)),
+                        borderSide: BorderSide.none,
+                      ),
+                      filled: true,
+                      fillColor: Colors.transparent),
                 ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: CustomNavBar(
-              currentIndex: _currentIndex,
-              onTap: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
+            Positioned(
+              top: ScreenUtil().setHeight(123),
+              right: ScreenUtil().setWidth(20),
+              child: Container(
+                width: ScreenUtil().setWidth(45),
+                height: ScreenUtil().setHeight(45),
+                decoration: BoxDecoration(
+                  color: Colors.orange,
+                  borderRadius: BorderRadius.circular(ScreenUtil().setWidth(8)),
+                ),
+                child: PopupMenuButton<String>(
+                  onSelected: _toggleSortOrder,
+                  itemBuilder: (BuildContext context) {
+                    return ['Сначала новые', 'Сначала старые']
+                        .map((String choice) {
+                      return PopupMenuItem<String>(
+                        value: choice,
+                        child: Text(choice),
+                      );
+                    }).toList();
+                  },
+                  child: Center(
+                    child: Icon(Icons.sort, color: Colors.white),
+                  ),
+                ),
+              ),
             ),
-          )
-        ],
+            Positioned(
+              top: ScreenUtil().setHeight(170),
+              left: ScreenUtil().setWidth(20),
+              right: ScreenUtil().setWidth(20),
+              bottom: ScreenUtil().setHeight(100),
+              child: _filteredReceipts.isNotEmpty
+                  ? ListView.builder(
+                      itemCount: _filteredReceipts.length,
+                      itemBuilder: (context, index) {
+                        final receipt = _filteredReceipts[index];
+                        return Card(
+                          margin: EdgeInsets.symmetric(
+                              vertical: ScreenUtil().setHeight(10)),
+                          child: ListTile(
+                            leading: receipt['imagePath'].isNotEmpty
+                                ? Image.file(File(receipt['imagePath']))
+                                : Icon(Icons.image),
+                            title: Text(receipt['name']),
+                            subtitle: Text(
+                                '${receipt['date']} - ${receipt['amount']} руб. - ${receipt['category']}'),
+                            trailing: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.edit),
+                                  onPressed: () => _editReceipt(index),
+                                ),
+                                IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () {
+                                    _deleteReceipt(index);
+                                  },
+                                ),
+                              ],
+                            ),
+                            onTap: () {},
+                          ),
+                        );
+                      },
+                    )
+                  : Center(
+                      child: Text(
+                        '',
+                        style: TextStyle(
+                            fontSize: ScreenUtil().setSp(18),
+                            color: Colors.grey),
+                      ),
+                    ),
+            ),
+            Positioned(
+              bottom: 22.h,
+              right: 155.w,
+              child: SvgPicture.asset(
+                'assets/3.svg',
+                width: 70.w,
+                height: 70.h,
+              ),
+            ),
+            Positioned(
+              bottom: 35.h,
+              left: 158.w,
+              child: GestureDetector(
+                onTap: () => _openCamera(context),
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: Text(
+                    '',
+                    style: TextStyle(color: Colors.white, fontSize: 16.sp),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

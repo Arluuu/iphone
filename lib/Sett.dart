@@ -110,19 +110,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   Text('', style: TextStyle(fontSize: ScreenUtil().setSp(16))),
             ),
           ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: CustomNavBar(
-              currentIndex: _currentIndex,
-              onTap: (index) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-            ),
-          ),
         ],
       ),
     );
