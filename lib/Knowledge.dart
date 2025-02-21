@@ -45,8 +45,7 @@ class _KnowledgeScreenState extends State<KnowledgeScreen> {
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize:
-          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      designSize: Size(375, 812),
       minTextAdapt: true,
     );
 

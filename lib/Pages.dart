@@ -454,8 +454,7 @@ class Page3Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize:
-          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      designSize: Size(375, 812),
       minTextAdapt: true,
     );
 
@@ -568,8 +567,7 @@ class Page4Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize:
-          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      designSize: Size(375, 812),
       minTextAdapt: true,
     );
 

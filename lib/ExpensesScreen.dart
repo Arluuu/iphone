@@ -8,6 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:convert';
 
 class ExpensesScreen extends StatefulWidget {
+  const ExpensesScreen({super.key});
+
   @override
   _ExpensesScreenState createState() => _ExpensesScreenState();
 }
@@ -204,8 +206,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize:
-          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      designSize: Size(375, 812),
       minTextAdapt: true,
     );
 

@@ -84,8 +84,7 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize:
-          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      designSize: Size(375, 812),
       minTextAdapt: true,
     );
 
@@ -190,12 +189,12 @@ class _EditReceiptScreenState extends State<EditReceiptScreen> {
             ),
           ),
           Positioned(
-            top: ScreenUtil().setHeight(-20),
+            top: ScreenUtil().setHeight(-10),
             right: ScreenUtil().setWidth(0),
             child: SvgPicture.asset(
               'assets/statbar.svg',
               width: ScreenUtil().setWidth(200),
-              height: ScreenUtil().setHeight(130),
+              height: ScreenUtil().setHeight(103),
             ),
           ),
           Positioned(

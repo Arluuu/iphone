@@ -64,7 +64,7 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
       'imagePath': _currentImage.path,
     };
 
-    print('Saving purchase details: $receipt'); // Отладочное сообщение
+    print('Saving purchase details: $receipt');
 
     widget.onSave(receipt);
     Navigator.pop(context);

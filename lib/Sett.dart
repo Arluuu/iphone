@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iphone/BottomNavigationBar.dart';
 import 'package:iphone/NavBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -112,6 +113,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ],
       ),
+      bottomNavigationBar: CustomBottomNavigationBar(),
     );
   }
 }

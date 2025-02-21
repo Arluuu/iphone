@@ -10,22 +10,24 @@ import 'package:iphone/Sett.dart';
 import 'package:iphone/photki.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
+import 'dart:io';
 
-class CustomNavBar extends StatefulWidget {
-  final int currentIndex;
-  final ValueChanged<int> onTap;
-
-  const CustomNavBar({
-    Key? key,
-    required this.currentIndex,
-    required this.onTap,
-  }) : super(key: key);
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
 
   @override
-  _CustomNavBarState createState() => _CustomNavBarState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _CustomNavBarState extends State<CustomNavBar> {
+class _MainScreenState extends State<MainScreen> {
+  int _currentIndex = 0;
+  final List<Widget> _screens = [
+    SavedScreen(),
+    ExpensesScreen(),
+    KnowledgeScreen(),
+    SettingsScreen(),
+  ];
+
   final List<String> _images = [
     'assets/5.svg',
     'assets/1.svg',
@@ -164,121 +166,35 @@ class _CustomNavBarState extends State<CustomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 109.h,
-      width: double.infinity,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: SvgPicture.asset(
-              _images[widget.currentIndex],
-              fit: BoxFit.cover,
-              alignment: Alignment.center,
-            ),
+    return Scaffold(
+      body: _screens[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(_images[0]),
+            label: 'Сохраненные',
           ),
-          Positioned(
-              left: 25.w,
-              bottom: 37.h,
-              child: Opacity(
-                opacity: 0.0,
-                child: _buildNavItem(Icons.home, 0, color: Colors.transparent),
-              )),
-          Positioned(
-              left: 95.w,
-              bottom: 37.h,
-              child: Opacity(
-                opacity: 0.0,
-                child: _buildNavItem(Icons.home, 1, color: Colors.transparent),
-              )),
-          Positioned(
-            right: 95.w,
-            bottom: 37.h,
-            child: Opacity(
-              opacity: 0.0,
-              child: _buildNavItem(Icons.home, 2, color: Colors.transparent),
-            ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(_images[1]),
+            label: 'Расходы',
           ),
-          Positioned(
-            right: 22.w,
-            bottom: 37.h,
-            child: Opacity(
-              opacity: 0.0,
-              child: _buildNavItem(Icons.home, 3, color: Colors.transparent),
-            ),
-          ),
-          Positioned(
-            bottom: 35.h,
-            left: 158.w,
-            child: GestureDetector(
+          BottomNavigationBarItem(
+            icon: GestureDetector(
               onTap: () => _openCamera(context),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 30.w, vertical: 25.h),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: Text(
-                  '',
-                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                ),
-              ),
+              child: SvgPicture.asset(_images[2]),
             ),
+            label: 'Камера',
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, int index, {required Color color}) {
-    final isSelected = widget.currentIndex == index;
-    return GestureDetector(
-      onTap: () {
-        widget.onTap(index);
-        switch (index) {
-          case 0:
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SavedScreen()),
-            );
-            break;
-          case 1:
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ExpensesScreen()),
-            );
-            break;
-          case 2:
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => KnowledgeScreen()),
-            );
-            break;
-          case 3:
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SettingsScreen()),
-            );
-            break;
-        }
-      },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: isSelected ? Colors.transparent : Colors.grey,
-            size: 24.sp,
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(_images[3]),
+            label: 'Настройки',
           ),
-          if (isSelected)
-            Container(
-              margin: EdgeInsets.only(top: 4.h),
-              width: 4.w,
-              height: 4.h,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.transparent,
-              ),
-            ),
         ],
       ),
     );

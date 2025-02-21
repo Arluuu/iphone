@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:device_preview_plus/device_preview_plus.dart';
+import 'package:iphone/BottomNavigationBar.dart';
 import 'package:iphone/SavedScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: SplashScreen(isFirstLaunch: isFirstLaunch),
+          home: CustomBottomNavigationBar(),
           routes: {
             '/onboarding': (context) => ImageSliderScreen(),
             '/saved2': (context) => SavedScreen(),
