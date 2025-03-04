@@ -21,7 +21,6 @@ class _SavedScreenState extends State<SavedScreen> {
   List<Map<String, dynamic>> _filteredReceipts = [];
   final TextEditingController _searchController = TextEditingController();
   bool _sortNewFirst = true;
-  int _currentIndex = 1;
 
   @override
   void initState() {
@@ -54,25 +53,30 @@ class _SavedScreenState extends State<SavedScreen> {
   Future<void> _saveReceipt(Map<String, dynamic> newReceipt) async {
     final prefs = await SharedPreferences.getInstance();
 
-    _savedReceipts.insert(0, newReceipt);
+    bool isDuplicate = _savedReceipts.any((receipt) =>
+        receipt['date'] == newReceipt['date'] &&
+        receipt['amount'] == newReceipt['amount']);
 
-    await prefs.setString('saved_receipts', jsonEncode(_savedReceipts));
+    if (!isDuplicate) {
+      setState(() {
+        _savedReceipts.insert(0, newReceipt);
+        _filteredReceipts.insert(0, newReceipt);
+        _sortReceipts();
+      });
 
-    setState(() {
-      _filterReceipts();
-    });
+      await prefs.setString('saved_receipts', jsonEncode(_savedReceipts));
+    }
   }
 
   Future<void> _deleteReceipt(int index) async {
     final prefs = await SharedPreferences.getInstance();
 
-    _savedReceipts.removeAt(index);
-
-    await prefs.setString('saved_receipts', jsonEncode(_savedReceipts));
-
     setState(() {
+      _savedReceipts.removeAt(index);
       _filterReceipts();
     });
+
+    await prefs.setString('saved_receipts', jsonEncode(_savedReceipts));
   }
 
   void _openCamera(BuildContext context) async {
@@ -80,7 +84,7 @@ class _SavedScreenState extends State<SavedScreen> {
     final XFile? image = await _picker.pickImage(source: ImageSource.camera);
 
     if (image != null) {
-      Navigator.push(
+      final newReceipt = await Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => PurchaseDetailsScreen(
@@ -89,6 +93,10 @@ class _SavedScreenState extends State<SavedScreen> {
           ),
         ),
       );
+
+      if (newReceipt != null) {
+        _saveReceipt(newReceipt);
+      }
     }
   }
 
@@ -276,34 +284,6 @@ class _SavedScreenState extends State<SavedScreen> {
                             color: Colors.grey),
                       ),
                     ),
-            ),
-            Positioned(
-              bottom: 22.h,
-              right: 155.w,
-              child: SvgPicture.asset(
-                'assets/3.svg',
-                width: 70.w,
-                height: 70.h,
-              ),
-            ),
-            Positioned(
-              bottom: 35.h,
-              left: 158.w,
-              child: GestureDetector(
-                onTap: () => _openCamera(context),
-                child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 30.w, vertical: 15.h),
-                  decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Text(
-                    '',
-                    style: TextStyle(color: Colors.white, fontSize: 16.sp),
-                  ),
-                ),
-              ),
             ),
           ],
         ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:uuid/uuid.dart';
 
 class PurchaseDetailsScreen extends StatefulWidget {
   final XFile image;
@@ -25,6 +26,7 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
   final TextEditingController _warrantyDateController = TextEditingController();
   bool _hasWarranty = false;
   late XFile _currentImage;
+  final Uuid _uuid = Uuid();
 
   @override
   void initState() {
@@ -53,6 +55,7 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
 
   void _savePurchaseDetails() {
     final receipt = {
+      'id': _uuid.v4(),
       'name': _nameController.text,
       'date': _dateController.text,
       'amount': _amountController.text,
@@ -63,8 +66,6 @@ class _PurchaseDetailsScreenState extends State<PurchaseDetailsScreen> {
       'description': _descriptionController.text,
       'imagePath': _currentImage.path,
     };
-
-    print('Saving purchase details: $receipt');
 
     widget.onSave(receipt);
     Navigator.pop(context);

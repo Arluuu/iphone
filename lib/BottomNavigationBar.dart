@@ -5,7 +5,7 @@ import 'package:iphone/EditReceiptScreen.dart';
 import 'package:iphone/ExpensesScreen.dart';
 import 'package:iphone/Knowledge.dart';
 import 'package:iphone/SavedScreen.dart';
-import 'package:iphone/Sett.dart';
+import 'package:iphone/Settings.dart';
 import 'package:iphone/photki.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -23,7 +23,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     SavedScreen(),
     ExpensesScreen(),
     KnowledgeScreen(),
-    SettingsScreen(),
+    SettingsScreen()
   ];
 
   final List<String> _svgAssets = [
@@ -90,8 +90,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
     await prefs.setString('saved_receipts', jsonEncode(_savedReceipts));
   }
 
-  Future<void> _openCamera(BuildContext context) async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.camera);
+  Future<void> _pickImage(ImageSource source) async {
+    final XFile? image = await _picker.pickImage(source: source);
 
     if (image != null) {
       final newReceipt = await Navigator.push(
@@ -108,6 +108,40 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         _saveReceipt(newReceipt);
       }
     }
+  }
+
+  Future<void> _showImageSourceDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Выберите источник изображения'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                GestureDetector(
+                  child: Text('Открыть камеру'),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    _pickImage(ImageSource.camera);
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                ),
+                GestureDetector(
+                  child: Text('Выбрать из галереи'),
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    _pickImage(ImageSource.gallery);
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void _editReceipt(int index) async {
@@ -166,6 +200,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   }
 
   void _onItemTapped(int index) {
+    debugPrint('Нажата кнопка: $index');
     setState(() {
       _selectedIndex = index;
     });
@@ -202,6 +237,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     GestureDetector(
                       onTap: () => _onItemTapped(0),
                       child: Icon(
+                        size: 55,
                         Icons.home,
                         color: _selectedIndex == 0
                             ? Colors.transparent
@@ -209,10 +245,11 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       ),
                     ),
                     ///////////////////////////////////////////////////2
-                    SizedBox(width: 14),
+                    SizedBox(width: 5),
                     GestureDetector(
                       onTap: () => _onItemTapped(1),
                       child: Icon(
+                        size: 55,
                         Icons.search,
                         color: _selectedIndex == 1
                             ? Colors.transparent
@@ -224,7 +261,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 30.0),
                       child: GestureDetector(
-                        onTap: () => _openCamera(context),
+                        onTap: () => _showImageSourceDialog(context),
                         child: Icon(
                           Icons.camera,
                           size: 77,
@@ -238,23 +275,25 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
                       onTap: () => _onItemTapped(2),
                       child: Icon(
                         Icons.book,
+                        size: 55,
                         color: _selectedIndex == 2
                             ? Colors.transparent
                             : Colors.transparent,
                       ),
                     ),
-                    SizedBox(width: 20),
+                    SizedBox(width: 7),
                     ///////////////////////////////////////////////////5
                     GestureDetector(
                       onTap: () => _onItemTapped(3),
                       child: Icon(
+                        size: 55,
                         Icons.settings,
                         color: _selectedIndex == 3
                             ? Colors.transparent
                             : Colors.transparent,
                       ),
                     ),
-                    SizedBox(width: 0),
+                    SizedBox(width: 5),
                   ],
                 ),
               ),

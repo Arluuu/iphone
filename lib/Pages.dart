@@ -55,8 +55,7 @@ class Page1ScreenState extends State<Page1Screen> {
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize:
-          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      designSize: Size(375, 812),
       minTextAdapt: true,
     );
 
@@ -227,8 +226,7 @@ class Page2Screen extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenUtil.init(
       context,
-      designSize:
-          Size(375, 812), // Установите размеры дизайна, которые вы используете
+      designSize: Size(375, 812),
       minTextAdapt: true,
     );
 

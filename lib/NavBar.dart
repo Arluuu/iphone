@@ -6,7 +6,7 @@ import 'package:iphone/EditReceiptScreen.dart';
 import 'package:iphone/ExpensesScreen.dart';
 import 'package:iphone/Knowledge.dart';
 import 'package:iphone/SavedScreen.dart';
-import 'package:iphone/Sett.dart';
+import 'package:iphone/Settings.dart';
 import 'package:iphone/photki.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:iphone/NavBar.dart';
 import 'package:iphone/Pages.dart';
 
 class KnowledgeScreen extends StatefulWidget {
@@ -11,8 +10,6 @@ class KnowledgeScreen extends StatefulWidget {
 }
 
 class _KnowledgeScreenState extends State<KnowledgeScreen> {
-  int _currentIndex = 3;
-
   void _navigateToPage1(BuildContext context) {
     Navigator.push(
       context,
